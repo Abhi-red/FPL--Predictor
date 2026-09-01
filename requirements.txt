@@ -1,0 +1,13 @@
+requests>=2.31
+pandas>=2.0
+numpy>=1.24
+pyarrow>=12.0
+xgboost>=2.0
+scikit-learn>=1.3
+pulp>=2.7,<4
+sentence-transformers>=2.2
+faiss-cpu>=1.7
+anthropic>=0.40
+feedparser>=6.0
+joblib>=1.3
+pytest>=8.0

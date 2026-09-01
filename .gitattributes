@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.faiss binary
+*.parquet binary
+*.joblib binary
+*.db binary
