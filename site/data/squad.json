@@ -1,0 +1,366 @@
+{
+  "formation": "3-5-2",
+  "total_cost": 99.2,
+  "predicted_points": 71.19,
+  "captain": {
+    "player_id": 223094,
+    "web_name": "Haaland",
+    "position": "FWD",
+    "team": "Man City",
+    "price": 15.5,
+    "predicted_points": 7.36,
+    "in_xi": true,
+    "is_captain": true,
+    "is_vice": false
+  },
+  "vice": {
+    "player_id": 209244,
+    "web_name": "Foden",
+    "position": "MID",
+    "team": "Man City",
+    "price": 7.0,
+    "predicted_points": 7.01,
+    "in_xi": true,
+    "is_captain": false,
+    "is_vice": true
+  },
+  "xi": [
+    {
+      "player_id": 483067,
+      "web_name": "Silva",
+      "position": "DEF",
+      "team": "Bournemouth",
+      "price": 5.0,
+      "predicted_points": 4.99,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 226597,
+      "web_name": "Gabriel",
+      "position": "DEF",
+      "team": "Arsenal",
+      "price": 8.0,
+      "predicted_points": 4.81,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 97032,
+      "web_name": "Virgil",
+      "position": "DEF",
+      "team": "Liverpool",
+      "price": 6.5,
+      "predicted_points": 4.71,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 209244,
+      "web_name": "Foden",
+      "position": "MID",
+      "team": "Man City",
+      "price": 7.0,
+      "predicted_points": 7.01,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": true
+    },
+    {
+      "player_id": 466052,
+      "web_name": "Cherki",
+      "position": "MID",
+      "team": "Man City",
+      "price": 7.7,
+      "predicted_points": 6.58,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 494595,
+      "web_name": "Wirtz",
+      "position": "MID",
+      "team": "Liverpool",
+      "price": 7.5,
+      "predicted_points": 5.41,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 513418,
+      "web_name": "Schade",
+      "position": "MID",
+      "team": "Brentford",
+      "price": 6.0,
+      "predicted_points": 5.36,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 424876,
+      "web_name": "Szoboszlai",
+      "position": "MID",
+      "team": "Liverpool",
+      "price": 7.0,
+      "predicted_points": 5.35,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 223094,
+      "web_name": "Haaland",
+      "position": "FWD",
+      "team": "Man City",
+      "price": 15.5,
+      "predicted_points": 7.36,
+      "in_xi": true,
+      "is_captain": true,
+      "is_vice": false
+    },
+    {
+      "player_id": 502500,
+      "web_name": "Thiago",
+      "position": "FWD",
+      "team": "Brentford",
+      "price": 8.0,
+      "predicted_points": 5.27,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 473284,
+      "web_name": "Tzolakis",
+      "position": "GK",
+      "team": "Hull City",
+      "price": 4.5,
+      "predicted_points": 6.98,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    }
+  ],
+  "bench": [
+    {
+      "player_id": 173878,
+      "web_name": "Dasilva",
+      "position": "DEF",
+      "team": "Coventry City",
+      "price": 4.0,
+      "predicted_points": 2.17,
+      "in_xi": false,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 80178,
+      "web_name": "Bidwell",
+      "position": "DEF",
+      "team": "Coventry City",
+      "price": 4.0,
+      "predicted_points": 0.0,
+      "in_xi": false,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 490145,
+      "web_name": "Scarlett",
+      "position": "FWD",
+      "team": "Spurs",
+      "price": 4.5,
+      "predicted_points": 0.01,
+      "in_xi": false,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 97846,
+      "web_name": "Cairns",
+      "position": "GK",
+      "team": "Leeds",
+      "price": 4.0,
+      "predicted_points": 0.04,
+      "in_xi": false,
+      "is_captain": false,
+      "is_vice": false
+    }
+  ],
+  "squad": [
+    {
+      "player_id": 483067,
+      "web_name": "Silva",
+      "position": "DEF",
+      "team": "Bournemouth",
+      "price": 5.0,
+      "predicted_points": 4.99,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 226597,
+      "web_name": "Gabriel",
+      "position": "DEF",
+      "team": "Arsenal",
+      "price": 8.0,
+      "predicted_points": 4.81,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 97032,
+      "web_name": "Virgil",
+      "position": "DEF",
+      "team": "Liverpool",
+      "price": 6.5,
+      "predicted_points": 4.71,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 209244,
+      "web_name": "Foden",
+      "position": "MID",
+      "team": "Man City",
+      "price": 7.0,
+      "predicted_points": 7.01,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": true
+    },
+    {
+      "player_id": 466052,
+      "web_name": "Cherki",
+      "position": "MID",
+      "team": "Man City",
+      "price": 7.7,
+      "predicted_points": 6.58,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 494595,
+      "web_name": "Wirtz",
+      "position": "MID",
+      "team": "Liverpool",
+      "price": 7.5,
+      "predicted_points": 5.41,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 513418,
+      "web_name": "Schade",
+      "position": "MID",
+      "team": "Brentford",
+      "price": 6.0,
+      "predicted_points": 5.36,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 424876,
+      "web_name": "Szoboszlai",
+      "position": "MID",
+      "team": "Liverpool",
+      "price": 7.0,
+      "predicted_points": 5.35,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 223094,
+      "web_name": "Haaland",
+      "position": "FWD",
+      "team": "Man City",
+      "price": 15.5,
+      "predicted_points": 7.36,
+      "in_xi": true,
+      "is_captain": true,
+      "is_vice": false
+    },
+    {
+      "player_id": 502500,
+      "web_name": "Thiago",
+      "position": "FWD",
+      "team": "Brentford",
+      "price": 8.0,
+      "predicted_points": 5.27,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 473284,
+      "web_name": "Tzolakis",
+      "position": "GK",
+      "team": "Hull City",
+      "price": 4.5,
+      "predicted_points": 6.98,
+      "in_xi": true,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 173878,
+      "web_name": "Dasilva",
+      "position": "DEF",
+      "team": "Coventry City",
+      "price": 4.0,
+      "predicted_points": 2.17,
+      "in_xi": false,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 80178,
+      "web_name": "Bidwell",
+      "position": "DEF",
+      "team": "Coventry City",
+      "price": 4.0,
+      "predicted_points": 0.0,
+      "in_xi": false,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 490145,
+      "web_name": "Scarlett",
+      "position": "FWD",
+      "team": "Spurs",
+      "price": 4.5,
+      "predicted_points": 0.01,
+      "in_xi": false,
+      "is_captain": false,
+      "is_vice": false
+    },
+    {
+      "player_id": 97846,
+      "web_name": "Cairns",
+      "position": "GK",
+      "team": "Leeds",
+      "price": 4.0,
+      "predicted_points": 0.04,
+      "in_xi": false,
+      "is_captain": false,
+      "is_vice": false
+    }
+  ],
+  "season": "2026-27",
+  "gameweek": 3,
+  "generated_at": "2026-09-01T18:13:04.373408+00:00"
+}

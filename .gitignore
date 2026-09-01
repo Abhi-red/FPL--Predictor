@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Secrets
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated data — rebuilt by the pipeline / persisted via CI cache, not git.
+# The static site consumes only site/data/*.json, which IS committed.
+data/*.db
+data/*.parquet
+data/*.json
+data/models/
+data/faiss/
+*.faiss

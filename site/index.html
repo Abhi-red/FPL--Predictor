@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FPL Weekly Predictor</title>
+  <link rel="stylesheet" href="./css/styles.css?v=1" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="mark">FPL</span>
+      <span class="brand-text">Weekly Predictor</span>
+    </div>
+    <div class="gw-badge" id="gwBadge">GW –</div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab is-active" data-view="squad" role="tab">Squad</button>
+    <button class="tab" data-view="players" role="tab">Players</button>
+    <button class="tab" data-view="explain" role="tab">Why</button>
+  </nav>
+
+  <main>
+    <section id="view-squad" class="view is-active">
+      <div class="squad-summary" id="squadSummary"></div>
+      <div class="pitch" id="pitch"></div>
+      <h3 class="bench-label">Bench</h3>
+      <div class="bench" id="bench"></div>
+    </section>
+
+    <section id="view-players" class="view">
+      <div class="controls">
+        <input type="search" id="search" placeholder="Search player or club…" />
+        <div class="pos-filter" id="posFilter">
+          <button class="chip is-active" data-pos="ALL">All</button>
+          <button class="chip" data-pos="GK">GK</button>
+          <button class="chip" data-pos="DEF">DEF</button>
+          <button class="chip" data-pos="MID">MID</button>
+          <button class="chip" data-pos="FWD">FWD</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="playersTable">
+          <thead>
+            <tr>
+              <th data-sort="web_name">Player</th>
+              <th data-sort="team">Club</th>
+              <th data-sort="position">Pos</th>
+              <th data-sort="price" class="num">£</th>
+              <th data-sort="raw_points" class="num">Raw</th>
+              <th data-sort="adjusted_points" class="num">Adj</th>
+              <th data-sort="news_flag">News</th>
+            </tr>
+          </thead>
+          <tbody id="playersBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="view-explain" class="view">
+      <article id="explanation" class="prose"></article>
+    </section>
+  </main>
+
+  <div class="drawer" id="drawer" hidden>
+    <div class="drawer-panel">
+      <button class="drawer-close" id="drawerClose" aria-label="Close">×</button>
+      <div id="drawerBody"></div>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <span id="generatedAt"></span>
+    <span>Model + RAG + ILP · rebuilt weekly · <a href="https://github.com/vaastav/Fantasy-Premier-League">historical data</a></span>
+  </footer>
+
+  <script src="./js/app.js?v=1"></script>
+</body>
+</html>

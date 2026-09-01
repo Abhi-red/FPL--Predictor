@@ -1,0 +1,72 @@
+name: weekly-pipeline
+
+# Runs after each gameweek's fixtures finish (Monday morning UTC), plus on demand.
+on:
+  schedule:
+    - cron: "30 6 * * MON"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-pipeline
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # The SQLite DB, trained models and FAISS index are gitignored; persist
+      # them between runs here instead. A cache miss triggers a full backfill.
+      - name: Restore data cache
+        id: data-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            data/fpl.db
+            data/models
+            data/faiss
+            data/features.parquet
+          key: fpl-data-${{ github.run_id }}
+          restore-keys: |
+            fpl-data-
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Initialise database
+        run: python src/db.py
+
+      - name: Bootstrap on cache miss (identity + historical backfill)
+        if: steps.data-cache.outputs.cache-matched-key == ''
+        run: |
+          python src/ingest/fetch_fpl.py
+          python src/ingest/backfill_historical.py
+
+      - name: Refresh player identity / prices
+        run: python src/ingest/fetch_fpl.py
+
+      - name: Run pipeline
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python src/pipeline.py
+
+      - name: Commit site data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add site/data
+          if git diff --cached --quiet; then
+            echo "no changes to commit"
+          else
+            git commit -m "chore: weekly pipeline output $(date -u +%Y-%m-%d)"
+            git push
+          fi

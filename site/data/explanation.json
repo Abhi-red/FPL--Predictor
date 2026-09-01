@@ -1,0 +1,22 @@
+{
+  "season": "2026-27",
+  "gameweek": 3,
+  "generated_at": "2026-09-01T18:13:05.820871+00:00",
+  "source": "template (api-error)",
+  "summary": "A 3-5-2 squad costing GBP99.2m, projected 71.19 points for GW3. Built by maximising model-predicted points under FPL's budget, formation and 3-per-club rules.",
+  "captain_rationale": "Haaland is the highest projected starter, with Foden as vice.",
+  "standout_picks": [
+    {
+      "player": "Haaland",
+      "reason": "Man City FWD at GBP15.5m, projected 7.36 pts"
+    },
+    {
+      "player": "Foden",
+      "reason": "Man City MID at GBP7.0m, projected 7.01 pts"
+    },
+    {
+      "player": "Tzolakis",
+      "reason": "Hull City GK at GBP4.5m, projected 6.98 pts"
+    }
+  ]
+}
