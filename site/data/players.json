@@ -2,7 +2,7 @@
   "meta": {
     "season": "2026-27",
     "gameweek": 3,
-    "generated_at": "2026-09-01T18:13:06.057208+00:00",
+    "generated_at": "2026-09-01T18:27:19.915517+00:00",
     "player_count": 629
   },
   "players": [
@@ -3175,24 +3175,6 @@
       "was_home": 1
     },
     {
-      "player_id": 470313,
-      "web_name": "Woltemade",
-      "position": "FWD",
-      "team": "Newcastle",
-      "price": 5.9,
-      "raw_points": 2.23,
-      "adjusted_points": 2.23,
-      "adjustment_factor": 1.0,
-      "adjustment_reason": null,
-      "news_url": null,
-      "roll5_total_points": 3.2,
-      "roll5_minutes_played": 46.0,
-      "start_rate_5": 0.6,
-      "form_ewm": 2.7468148194474864,
-      "fdr": 2.333,
-      "was_home": 1
-    },
-    {
       "player_id": 611695,
       "web_name": "Yalcouy\u00e9",
       "position": "MID",
@@ -4633,24 +4615,6 @@
       "was_home": 0
     },
     {
-      "player_id": 448047,
-      "web_name": "Enzo",
-      "position": "MID",
-      "team": "Chelsea",
-      "price": 6.9,
-      "raw_points": 1.617,
-      "adjusted_points": 1.62,
-      "adjustment_factor": 1.0,
-      "adjustment_reason": null,
-      "news_url": null,
-      "roll5_total_points": 4.6,
-      "roll5_minutes_played": 59.0,
-      "start_rate_5": 0.6,
-      "form_ewm": 2.0981085212560693,
-      "fdr": 3.667,
-      "was_home": 0
-    },
-    {
       "player_id": 608227,
       "web_name": "Stroud",
       "position": "MID",
@@ -4773,6 +4737,24 @@
       "roll5_minutes_played": 45.0,
       "start_rate_5": 0.4,
       "form_ewm": 1.0869380898480416,
+      "fdr": 2.333,
+      "was_home": 1
+    },
+    {
+      "player_id": 470313,
+      "web_name": "Woltemade",
+      "position": "FWD",
+      "team": "Newcastle",
+      "price": 5.9,
+      "raw_points": 2.23,
+      "adjusted_points": 1.56,
+      "adjustment_factor": 0.7,
+      "adjustment_reason": "OUT: matched 'out of the' in recent news",
+      "news_url": "https://www.theguardian.com/football/live/2026/sep/01/football-transfer-deadline-day-fernandez-alvarez-mudryk-ndiaye-latest-news-updates",
+      "roll5_total_points": 3.2,
+      "roll5_minutes_played": 46.0,
+      "start_rate_5": 0.6,
+      "form_ewm": 2.7468148194474864,
       "fdr": 2.333,
       "was_home": 1
     },
@@ -6142,6 +6124,24 @@
       "start_rate_5": 0.0,
       "form_ewm": 1.258522304624039,
       "fdr": 2.333,
+      "was_home": 0
+    },
+    {
+      "player_id": 448047,
+      "web_name": "Enzo",
+      "position": "MID",
+      "team": "Chelsea",
+      "price": 6.9,
+      "raw_points": 1.617,
+      "adjusted_points": 1.13,
+      "adjustment_factor": 0.7,
+      "adjustment_reason": "OUT: matched 'out of the' in recent news",
+      "news_url": "https://www.theguardian.com/football/live/2026/sep/01/football-transfer-deadline-day-fernandez-alvarez-mudryk-ndiaye-latest-news-updates",
+      "roll5_total_points": 4.6,
+      "roll5_minutes_played": 59.0,
+      "start_rate_5": 0.6,
+      "form_ewm": 2.0981085212560693,
+      "fdr": 3.667,
       "was_home": 0
     },
     {
