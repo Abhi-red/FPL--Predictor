@@ -1,14 +1,21 @@
 """Pick the optimal 15-man squad + starting XI + captaincy with an ILP.
 
-Maximises predicted points of the XI (captain counted twice) subject to the real
-FPL rules: GBP 100.0m budget, 2/5/5/3 squad by position, at most 3 players from
-any one club, and a legal XI shape (1 GK, 3-5 DEF, 2-5 MID, 1-3 FWD, 11 total)
-chosen from the 15. Captain = highest predicted XI player, vice = second.
+Maximises a per-player *score* over the XI (captain counted twice), subject to
+the real FPL rules: GBP 100.0m budget, 2/5/5/3 squad by position, at most 3
+players from any one club, and a legal XI shape (1 GK, 3-5 DEF, 2-5 MID, 1-3
+FWD, 11 total) chosen from the 15.
 
-``optimize(players)`` is the pure entry point (list of dicts in, result dict
-out); ``main()`` wraps it in DB load / save.
+    score = predicted_points * (1 + ELITE_WEIGHT * elite_template_score)
 
-Run (after predict.py, ideally after adjust.py):
+ELITE_WEIGHT is read at run time from data/elite_weight_config.json, which
+src/optimize/tune_elite_weight.py writes after a walk-forward sweep. If that
+file is missing (or the tuner deferred), ELITE_WEIGHT is 0.0 and the score is
+just predicted_points. Captain/vice are always the top-two XI players by
+predicted_points - the elite signal shapes *selection*, not the captaincy call.
+
+``optimize(players)`` is the pure entry point; ``main()`` wraps it in DB I/O.
+
+Run (after predict.py, ideally after adjust.py + fetch_elite.py):
     python src/optimize/squad_optimizer.py
 """
 
@@ -26,25 +33,42 @@ from db import get_connection  # noqa: E402
 
 SITE_DATA = Path(__file__).resolve().parent.parent.parent / "site" / "data"
 DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
+ELITE_WEIGHT_CONFIG = DATA_DIR / "elite_weight_config.json"
 BENCH_POS_ORDER = {"GK": 3, "DEF": 0, "MID": 1, "FWD": 2}
 
 
+def load_elite_weight() -> tuple[float, str]:
+    """(weight, status) from the tuner's config; (0.0, 'no-config') if absent."""
+    if not ELITE_WEIGHT_CONFIG.exists():
+        return 0.0, "no-config"
+    try:
+        cfg = json.loads(ELITE_WEIGHT_CONFIG.read_text(encoding="utf-8"))
+        return float(cfg.get("elite_weight", 0.0)), str(cfg.get("status", "unknown"))
+    except Exception:  # noqa: BLE001
+        return 0.0, "unreadable-config"
+
+
 def optimize(players: list[dict]) -> dict:
-    """Solve the squad ILP. `players` items need: player_id, web_name, position,
-    team, price (tenths of a million), predicted_points."""
+    """Solve the squad ILP. Each `players` item needs: player_id, web_name,
+    position, team, price (tenths of a million), predicted_points. Optional
+    `score` (defaults to predicted_points) is what the objective maximises;
+    optional `elite_template_score` is carried through for display."""
     if len(players) < 15:
         raise ValueError(f"need at least 15 players, got {len(players)}")
 
     by_id = {p["player_id"]: p for p in players}
     ids = list(by_id)
     points = {i: float(by_id[i].get("predicted_points") or 0.0) for i in ids}
+    score = {i: float(by_id[i].get("score", points[i]) or 0.0) for i in ids}
 
     prob = pulp.LpProblem("fpl_squad", pulp.LpMaximize)
     squad = pulp.LpVariable.dicts("squad", ids, cat="Binary")
     xi = pulp.LpVariable.dicts("xi", ids, cat="Binary")
     captain = pulp.LpVariable.dicts("captain", ids, cat="Binary")
 
-    prob += pulp.lpSum(points[i] * xi[i] for i in ids) + pulp.lpSum(
+    # XI selection follows the elite-blended score; the captain double-up is
+    # valued at the pure model expectation.
+    prob += pulp.lpSum(score[i] * xi[i] for i in ids) + pulp.lpSum(
         points[i] * captain[i] for i in ids
     )
 
@@ -77,8 +101,9 @@ def optimize(players: list[dict]) -> dict:
 
     chosen = [i for i in ids if squad[i].value() > 0.5]
     starters = {i for i in chosen if xi[i].value() > 0.5}
-    captain_id = next(i for i in ids if captain[i].value() > 0.5)
-    vice_id = max((i for i in starters if i != captain_id), key=lambda i: points[i])
+    # Captain/vice: top-two XI by pure predicted_points (not the elite-blended score).
+    ranked_xi = sorted(starters, key=lambda i: points[i], reverse=True)
+    captain_id, vice_id = ranked_xi[0], ranked_xi[1]
 
     def view(i: int) -> dict:
         p = by_id[i]
@@ -89,6 +114,8 @@ def optimize(players: list[dict]) -> dict:
             "team": p["team"],
             "price": round(p["price"] / 10.0, 1),
             "predicted_points": round(points[i], 2),
+            "elite_template_score": round(float(p.get("elite_template_score") or 0.0), 4),
+            "score": round(score[i], 2),
             "in_xi": i in starters,
             "is_captain": i == captain_id,
             "is_vice": i == vice_id,
@@ -144,12 +171,22 @@ def load_candidates() -> tuple[int, list[dict]]:
         gameweek = row["gw"]
         if gameweek is None:
             raise RuntimeError("no predictions found - run src/models/predict.py first")
+        # Elite picks for the upcoming gameweek aren't published until managers
+        # set their teams, so fall back to the most recent gameweek that does
+        # have elite data (the current template changes slowly week to week).
         rows = conn.execute(
             """
             SELECT pr.player_id, p.web_name, p.position, p.team, p.now_cost AS price,
-                   COALESCE(pr.adjusted_points, pr.raw_points) AS predicted_points
+                   COALESCE(pr.adjusted_points, pr.raw_points) AS predicted_points,
+                   COALESCE(e.elite_template_score, 0.0)       AS elite_template_score
             FROM predictions pr
             JOIN players p ON p.player_id = pr.player_id
+            LEFT JOIN elite_squads e
+                   ON e.player_id = pr.player_id AND e.season = pr.season
+                  AND e.gameweek = (
+                      SELECT MAX(e2.gameweek) FROM elite_squads e2
+                      WHERE e2.season = pr.season AND e2.gameweek <= pr.gameweek
+                  )
             WHERE pr.season = ? AND pr.gameweek = ?
               AND p.now_cost IS NOT NULL AND pr.raw_points IS NOT NULL
             """,
@@ -160,11 +197,26 @@ def load_candidates() -> tuple[int, list[dict]]:
 
 def main() -> None:
     gameweek, candidates = load_candidates()
-    print(f"Optimising {SEASON} GW{gameweek} from {len(candidates)} candidates")
+    weight, status = load_elite_weight()
+    covered = sum(1 for c in candidates if c["elite_template_score"] > 0)
+    print(
+        f"Optimising {SEASON} GW{gameweek} from {len(candidates)} candidates | "
+        f"ELITE_WEIGHT={weight} ({status}); elite data for {covered} players"
+    )
+
+    for c in candidates:
+        c["score"] = c["predicted_points"] * (1 + weight * c["elite_template_score"])
 
     result = optimize(candidates)
     generated_at = datetime.now(timezone.utc).isoformat()
-    result.update(season=SEASON, gameweek=gameweek, generated_at=generated_at)
+    result.update(
+        season=SEASON,
+        gameweek=gameweek,
+        generated_at=generated_at,
+        elite_weight=weight,
+        elite_weight_status=status,
+        elite_players_covered=covered,
+    )
 
     squad_rows = [
         {

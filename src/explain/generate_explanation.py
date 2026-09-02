@@ -26,17 +26,52 @@ from db import get_connection  # noqa: E402
 SITE_DATA = Path(__file__).resolve().parent.parent.parent / "site" / "data"
 SQUAD_JSON = SITE_DATA / "squad.json"
 
+ELITE_CONFIG = SITE_DATA.parent.parent / "data" / "elite_weight_config.json"
+
 SYSTEM_PROMPT = (
     "You are an FPL analyst. You are given a squad that a points model and an "
     "optimiser produced. Explain it for a reader who knows football but not the "
-    "model. Be concrete: cite predicted points and any injury/rotation news "
-    "flag that is provided. Do not invent facts, stats, or news beyond what you "
-    "are given. Respond with ONLY a JSON object, no prose around it, shaped:\n"
-    '{"summary": "<2-3 sentences on the squad shape and overall approach>",\n'
+    "model. Be concrete: cite each player's predicted_points and, where "
+    "relevant, elite_template_score (0-1: how many elite managers own them) and "
+    "any injury/rotation news_flag. The context also gives elite_weight and "
+    "elite_note - state plainly whether elite ownership influenced selection or "
+    "whether it was ignored (weight 0 / deferred). Do not invent facts, stats, "
+    "or news beyond what you are given. Respond with ONLY a JSON object, no "
+    "prose around it, shaped:\n"
+    '{"summary": "<2-3 sentences on the squad shape and overall approach, '
+    'including whether the elite signal was used>",\n'
     ' "captain_rationale": "<1-2 sentences on the captain and vice pick>",\n'
-    ' "standout_picks": [{"player": "<name>", "reason": "<1-2 sentences>"}]}\n'
+    ' "standout_picks": [{"player": "<name>", "reason": "<1-2 sentences citing '
+    'the numbers>"}]}\n'
     "Include 2-4 standout picks."
 )
+
+
+def _elite_context() -> dict:
+    if not ELITE_CONFIG.exists():
+        return {"elite_weight": 0.0, "elite_weight_status": "no-config",
+                "elite_note": "Elite-template weight 0.0 (no tuning config yet); "
+                              "squad is pure model + news."}
+    cfg = json.loads(ELITE_CONFIG.read_text(encoding="utf-8"))
+    weight = cfg.get("elite_weight", 0.0)
+    status = cfg.get("status", "unknown")
+    if status == "tuned" and weight:
+        note = (
+            f"Elite-template weight {weight}, tuned over "
+            f"{cfg.get('n_backtest_gameweeks', '?')} walk-forward gameweeks "
+            f"({cfg.get('window', '?')}); it nudged selection toward "
+            f"elite-owned players."
+        )
+    elif status == "tuned":
+        note = (
+            f"Elite tuning ran over {cfg.get('n_backtest_gameweeks', '?')} "
+            f"gameweeks and found no weight beat pure stats, so elite ownership "
+            f"was NOT used (weight 0.0)."
+        )
+    else:  # deferred / no-config
+        reason = cfg.get("reason", "deferred to pure stats until enough elite data accumulates")
+        note = f"Elite-template weight 0.0 - {reason} Elite ownership was NOT used for this squad."
+    return {"elite_weight": weight, "elite_weight_status": status, "elite_note": note}
 
 
 def build_context() -> dict:
@@ -62,6 +97,7 @@ def build_context() -> dict:
             "club": player["team"],
             "price": player["price"],
             "predicted_points": player["predicted_points"],
+            "elite_template_score": round(player.get("elite_template_score", 0.0), 3),
         }
         if player["player_id"] in news:
             item["news_flag"] = news[player["player_id"]]["reason"]
@@ -77,6 +113,7 @@ def build_context() -> dict:
         "vice": squad["vice"]["web_name"],
         "starting_xi": [annotate(p) for p in squad["xi"]],
         "bench": [annotate(p) for p in squad["bench"]],
+        **_elite_context(),
     }
 
 
@@ -111,7 +148,7 @@ def _fallback(context: dict) -> dict:
             f"{p['name']} ({p['news_flag']})" for p in flagged
         ) + "."
     return {
-        "summary": summary,
+        "summary": summary.strip(),
         "captain_rationale": (
             f"{context['captain']} is the highest projected starter, with "
             f"{context['vice']} as vice."
@@ -121,7 +158,8 @@ def _fallback(context: dict) -> dict:
                 "player": p["name"],
                 "reason": (
                     f"{p['club']} {p['position']} at GBP{p['price']}m, "
-                    f"projected {p['predicted_points']} pts"
+                    f"projected {p['predicted_points']} pts, "
+                    f"elite ownership {round(p.get('elite_template_score', 0.0) * 100)}%"
                     + (f"; note: {p['news_flag']}" if "news_flag" in p else "")
                 ),
             }
@@ -142,6 +180,9 @@ def render_markdown(context: dict, body: dict) -> str:
         "",
         f"**Captain:** {context['captain']} | **Vice:** {context['vice']}  ",
         body.get("captain_rationale", ""),
+        "",
+        f"_Elite weight: {context.get('elite_weight', 0.0)} "
+        f"({context.get('elite_weight_status', 'n/a')}). {context.get('elite_note', '')}_",
         "",
         "## Standout picks",
         "",
@@ -183,6 +224,9 @@ def main() -> None:
         "gameweek": context["gameweek"],
         "generated_at": generated_at,
         "source": source,
+        "elite_weight": context.get("elite_weight", 0.0),
+        "elite_weight_status": context.get("elite_weight_status", "n/a"),
+        "elite_note": context.get("elite_note", ""),
         **body,
     }
 

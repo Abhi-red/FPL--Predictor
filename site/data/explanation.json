@@ -1,22 +1,25 @@
 {
   "season": "2026-27",
   "gameweek": 3,
-  "generated_at": "2026-09-01T18:27:19.829208+00:00",
+  "generated_at": "2026-09-01T18:45:02.909677+00:00",
   "source": "template (api-error)",
-  "summary": "A 3-5-2 squad costing GBP99.2m, projected 71.19 points for GW3. Built by maximising model-predicted points under FPL's budget, formation and 3-per-club rules.",
+  "elite_weight": 0.0,
+  "elite_weight_status": "deferred",
+  "elite_note": "Elite-template weight 0.0 - only 2 gameweek(s) have both elite ownership data and realized results; need 5. Deferring to pure stats until enough elite data accumulates. Elite ownership was NOT used for this squad.",
+  "summary": "A 3-5-2 squad costing GBP99.2m, projected 71.19 points for GW3. Built by maximising model-predicted points under FPL's budget, formation and 3-per-club rules. Elite-template weight 0.0 - only 2 gameweek(s) have both elite ownership data and realized results; need 5. Deferring to pure stats until enough elite data accumulates. Elite ownership was NOT used for this squad.",
   "captain_rationale": "Haaland is the highest projected starter, with Foden as vice.",
   "standout_picks": [
     {
       "player": "Haaland",
-      "reason": "Man City FWD at GBP15.5m, projected 7.36 pts"
+      "reason": "Man City FWD at GBP15.5m, projected 7.36 pts, elite ownership 18%"
     },
     {
       "player": "Foden",
-      "reason": "Man City MID at GBP7.0m, projected 7.01 pts"
+      "reason": "Man City MID at GBP7.0m, projected 7.01 pts, elite ownership 5%"
     },
     {
       "player": "Tzolakis",
-      "reason": "Hull City GK at GBP4.5m, projected 6.98 pts"
+      "reason": "Hull City GK at GBP4.5m, projected 6.98 pts, elite ownership 0%"
     }
   ]
 }

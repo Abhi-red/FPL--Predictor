@@ -130,11 +130,14 @@ python src/models/predict.py            # raw points for the next gameweek
 
 python src/rag/embed.py                 # scrape + embed news -> FAISS
 python src/rag/adjust.py                # bounded news adjustment of predictions
-python src/optimize/squad_optimizer.py  # ILP: 15 + XI + captain
+
+python src/ingest/fetch_elite.py        # sample elite-manager ownership (top of league 314)
+python src/optimize/tune_elite_weight.py    # walk-forward sweep -> data/elite_weight_config.json
+python src/optimize/squad_optimizer.py  # ILP: 15 + XI + captain, using the tuned ELITE_WEIGHT
 python src/explain/generate_explanation.py   # needs ANTHROPIC_API_KEY (falls back to a template)
 
-python src/pipeline.py                  # all of the above except the historical backfill
-pytest                                  # aggregation + optimizer constraint tests
+python src/pipeline.py                  # weekly path; retunes ELITE_WEIGHT only on a model retrain
+pytest                                  # aggregation, optimizer constraints, elite-weight rules
 ```
 
 The static site in `site/` reads `site/data/*.json`; serve it with any static

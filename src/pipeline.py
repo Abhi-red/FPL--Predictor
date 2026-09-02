@@ -25,7 +25,11 @@ from db import get_connection, init_db  # noqa: E402
 
 MODELS_DIR = Path(__file__).resolve().parent.parent / "data" / "models"
 SITE_DATA = Path(__file__).resolve().parent.parent / "site" / "data"
-NON_FATAL = {"embed", "adjust"}
+NON_FATAL = {"embed", "adjust", "fetch_elite", "tune_elite_weight"}
+
+# Set by stage_ensure_models when it actually retrains; gates the periodic
+# elite-weight retune below.
+_RETRAINED = False
 
 
 def run_stage(name: str, fn) -> bool:
@@ -66,6 +70,7 @@ def stage_build_features() -> None:
 
 
 def stage_ensure_models() -> None:
+    global _RETRAINED
     from models.train import production_fit
 
     manifest = MODELS_DIR / "manifest.json"
@@ -78,6 +83,7 @@ def stage_ensure_models() -> None:
         print("models present and fresh; skipping retrain")
         return
     production_fit()
+    _RETRAINED = True
 
 
 def stage_predict() -> None:
@@ -98,10 +104,22 @@ def stage_adjust() -> None:
     adjust_main()
 
 
+def stage_fetch_elite() -> None:
+    from ingest.fetch_elite import main as fetch_elite_main
+
+    fetch_elite_main()
+
+
 def stage_optimize() -> None:
     from optimize.squad_optimizer import main as optimize_main
 
     optimize_main()
+
+
+def stage_tune_elite_weight() -> None:
+    from optimize.tune_elite_weight import main as tune_main
+
+    tune_main()
 
 
 def stage_explain() -> None:
@@ -126,7 +144,8 @@ def stage_export_site_json() -> None:
                        pr.raw_points, pr.adjusted_points,
                        pr.adjustment_factor, pr.adjustment_reason, pr.news_url,
                        f.roll5_total_points, f.roll5_minutes_played,
-                       f.start_rate_5, f.form_ewm, f.fdr, f.was_home
+                       f.start_rate_5, f.form_ewm, f.fdr, f.was_home,
+                       e.elite_template_score
                 FROM players p
                 LEFT JOIN predictions pr
                        ON pr.player_id = p.player_id AND pr.season = :season
@@ -134,6 +153,12 @@ def stage_export_site_json() -> None:
                 LEFT JOIN player_features f
                        ON f.player_id = p.player_id AND f.season = :season
                       AND f.gameweek = :gw
+                LEFT JOIN elite_squads e
+                       ON e.player_id = p.player_id AND e.season = :season
+                      AND e.gameweek = (
+                          SELECT MAX(e2.gameweek) FROM elite_squads e2
+                          WHERE e2.season = :season AND e2.gameweek <= :gw
+                      )
                 WHERE p.element_id IS NOT NULL
                 ORDER BY pr.adjusted_points DESC NULLS LAST, pr.raw_points DESC NULLS LAST
                 """,
@@ -154,6 +179,8 @@ def stage_export_site_json() -> None:
     print(f"exported {len(players)} players for GW{gameweek}")
 
 
+# The always-run weekly path: fetch -> features -> models -> predict -> news ->
+# elite ownership -> optimise with the STORED elite weight -> explain -> publish.
 STAGES = [
     ("fetch_gameweek_stats", stage_fetch_gameweek_stats),
     ("build_features", stage_build_features),
@@ -161,6 +188,7 @@ STAGES = [
     ("predict", stage_predict),
     ("embed", stage_embed),
     ("adjust", stage_adjust),
+    ("fetch_elite", stage_fetch_elite),
     ("optimize", stage_optimize),
     ("explain", stage_explain),
     ("export_site_json", stage_export_site_json),
@@ -179,6 +207,17 @@ def main() -> None:
             print(f"\nAborting: fatal stage {name} failed", file=sys.stderr)
             sys.exit(1)
         print(f"(continuing; {name} is non-fatal)", file=sys.stderr)
+
+    # Periodic (not weekly): only retune the elite weight when the models were
+    # just retrained - retuning needs a fresh batch of realized results to be
+    # worth the walk-forward cost. This never changes THIS run's squad (which
+    # already used the stored weight); it updates the weight for next week.
+    if _RETRAINED:
+        if not run_stage("tune_elite_weight", stage_tune_elite_weight):
+            failed.append("tune_elite_weight")
+            print("(continuing; tune_elite_weight is non-fatal)", file=sys.stderr)
+    else:
+        print("\nskipping tune_elite_weight (models were not retrained this run)")
 
     print(f"\nPipeline done. Failed non-fatal stages: {failed or 'none'}")
 
