@@ -99,8 +99,55 @@ specific structured-output API shape). If `ANTHROPIC_API_KEY` is unset, or the
 call fails, a deterministic template writes the same fields so `pipeline.py`
 still completes (important for local runs and CI without the secret).
 
+## Elite-template weight
+
+The optimiser can nudge selection toward what elite managers own:
+
+    final_score = predicted_points * (1 + ELITE_WEIGHT * elite_template_score)
+
+`elite_template_score` is the fraction of a sampled top-`ELITE_SAMPLE_SIZE`
+(100) slice of FPL's overall league (id 314) that owns the player that gameweek
+(`src/ingest/fetch_elite.py`). Picks for the *upcoming* gameweek aren't
+published until managers set their teams, so the optimiser (and the site export)
+fall back to the most recent gameweek that has elite data — the template moves
+slowly week to week. `fetch_elite.py` also backfills any finished gameweek of
+the current season that has no elite row yet, so the tunable history grows on
+its own.
+
+**`ELITE_WEIGHT` is never hardcoded.** `src/optimize/tune_elite_weight.py`
+sweeps `ELITE_WEIGHT_CANDIDATES` (`0.0, 0.05, 0.1, 0.15, 0.2, 0.3` — `0.0` is
+the mandatory pure-stats control) by walk-forward backtest against *realized*
+historical points and writes the winner to `data/elite_weight_config.json`,
+which `squad_optimizer.py` reads at run time. Re-running the tuner as more elite
+data accumulates updates the live weight with no code change. It runs from the
+pipeline only when the prediction models are retrained (retuning needs a fresh
+batch of realized results to be worth doing); the weekly steps just optimise
+with the stored weight.
+
+**Elite ownership only exists going forward.** The FPL picks endpoint covers the
+current season's gameweeks only — there is no elite history for past seasons.
+Until `ELITE_TUNE_MIN_GAMEWEEKS` (5) gameweeks have both elite data and realized
+results, the tuner **defers**: it writes `ELITE_WEIGHT = 0.0`, status
+`deferred`, and this fact is surfaced in `DECISIONS.md` (the auto-generated
+section below) and in every weekly explanation, so a deferred weight is never
+mistaken for a tuned one. Ties or sub-noise (`ELITE_TUNE_NOISE_PTS`) margins
+also resolve to the lowest non-zero weight that matches the control, or 0.0.
+
 ## Frontend
 
 Plain HTML/CSS/vanilla JS, no build step, fetches `./data/*.json` with relative
 paths (works on a GitHub Pages project site and on Vercel). Placeholder JSON in
 `site/data/` lets the page render before the first pipeline run.
+
+## Elite-weight tuning (auto-generated)
+
+<!-- ELITE_WEIGHT_TUNING:START -->
+
+_Last run 2026-09-01T18:43:39.865613+00:00 — `python src/optimize/tune_elite_weight.py`._
+
+**Chosen `ELITE_WEIGHT` = 0.0** (status: `deferred`).
+
+only 2 gameweek(s) have both elite ownership data and realized results; need 5. Deferring to pure stats until enough elite data accumulates.
+
+
+<!-- ELITE_WEIGHT_TUNING:END -->

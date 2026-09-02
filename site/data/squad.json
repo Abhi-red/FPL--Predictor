@@ -9,6 +9,8 @@
     "team": "Man City",
     "price": 15.5,
     "predicted_points": 7.36,
+    "elite_template_score": 0.175,
+    "score": 7.36,
     "in_xi": true,
     "is_captain": true,
     "is_vice": false
@@ -20,6 +22,8 @@
     "team": "Man City",
     "price": 7.0,
     "predicted_points": 7.01,
+    "elite_template_score": 0.05,
+    "score": 7.01,
     "in_xi": true,
     "is_captain": false,
     "is_vice": true
@@ -32,6 +36,8 @@
       "team": "Bournemouth",
       "price": 5.0,
       "predicted_points": 4.99,
+      "elite_template_score": 0.0,
+      "score": 4.99,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -43,6 +49,8 @@
       "team": "Arsenal",
       "price": 8.0,
       "predicted_points": 4.81,
+      "elite_template_score": 0.35,
+      "score": 4.81,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -54,6 +62,8 @@
       "team": "Liverpool",
       "price": 6.5,
       "predicted_points": 4.71,
+      "elite_template_score": 0.0,
+      "score": 4.71,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -65,6 +75,8 @@
       "team": "Man City",
       "price": 7.0,
       "predicted_points": 7.01,
+      "elite_template_score": 0.05,
+      "score": 7.01,
       "in_xi": true,
       "is_captain": false,
       "is_vice": true
@@ -76,6 +88,8 @@
       "team": "Man City",
       "price": 7.7,
       "predicted_points": 6.58,
+      "elite_template_score": 0.1,
+      "score": 6.58,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -87,6 +101,8 @@
       "team": "Liverpool",
       "price": 7.5,
       "predicted_points": 5.41,
+      "elite_template_score": 0.075,
+      "score": 5.41,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -98,6 +114,8 @@
       "team": "Brentford",
       "price": 6.0,
       "predicted_points": 5.36,
+      "elite_template_score": 0.125,
+      "score": 5.36,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -109,6 +127,8 @@
       "team": "Liverpool",
       "price": 7.0,
       "predicted_points": 5.35,
+      "elite_template_score": 0.475,
+      "score": 5.35,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -120,6 +140,8 @@
       "team": "Man City",
       "price": 15.5,
       "predicted_points": 7.36,
+      "elite_template_score": 0.175,
+      "score": 7.36,
       "in_xi": true,
       "is_captain": true,
       "is_vice": false
@@ -131,6 +153,8 @@
       "team": "Brentford",
       "price": 8.0,
       "predicted_points": 5.27,
+      "elite_template_score": 0.125,
+      "score": 5.27,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -142,6 +166,8 @@
       "team": "Hull City",
       "price": 4.5,
       "predicted_points": 6.98,
+      "elite_template_score": 0.0,
+      "score": 6.98,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -155,6 +181,8 @@
       "team": "Coventry City",
       "price": 4.0,
       "predicted_points": 2.17,
+      "elite_template_score": 0.0,
+      "score": 2.17,
       "in_xi": false,
       "is_captain": false,
       "is_vice": false
@@ -166,6 +194,8 @@
       "team": "Coventry City",
       "price": 4.0,
       "predicted_points": 0.0,
+      "elite_template_score": 0.0,
+      "score": 0.0,
       "in_xi": false,
       "is_captain": false,
       "is_vice": false
@@ -177,6 +207,8 @@
       "team": "Spurs",
       "price": 4.5,
       "predicted_points": 0.01,
+      "elite_template_score": 0.0,
+      "score": 0.01,
       "in_xi": false,
       "is_captain": false,
       "is_vice": false
@@ -188,6 +220,8 @@
       "team": "Leeds",
       "price": 4.0,
       "predicted_points": 0.04,
+      "elite_template_score": 0.0,
+      "score": 0.04,
       "in_xi": false,
       "is_captain": false,
       "is_vice": false
@@ -201,6 +235,8 @@
       "team": "Bournemouth",
       "price": 5.0,
       "predicted_points": 4.99,
+      "elite_template_score": 0.0,
+      "score": 4.99,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -212,6 +248,8 @@
       "team": "Arsenal",
       "price": 8.0,
       "predicted_points": 4.81,
+      "elite_template_score": 0.35,
+      "score": 4.81,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -223,6 +261,8 @@
       "team": "Liverpool",
       "price": 6.5,
       "predicted_points": 4.71,
+      "elite_template_score": 0.0,
+      "score": 4.71,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -234,6 +274,8 @@
       "team": "Man City",
       "price": 7.0,
       "predicted_points": 7.01,
+      "elite_template_score": 0.05,
+      "score": 7.01,
       "in_xi": true,
       "is_captain": false,
       "is_vice": true
@@ -245,6 +287,8 @@
       "team": "Man City",
       "price": 7.7,
       "predicted_points": 6.58,
+      "elite_template_score": 0.1,
+      "score": 6.58,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -256,6 +300,8 @@
       "team": "Liverpool",
       "price": 7.5,
       "predicted_points": 5.41,
+      "elite_template_score": 0.075,
+      "score": 5.41,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -267,6 +313,8 @@
       "team": "Brentford",
       "price": 6.0,
       "predicted_points": 5.36,
+      "elite_template_score": 0.125,
+      "score": 5.36,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -278,6 +326,8 @@
       "team": "Liverpool",
       "price": 7.0,
       "predicted_points": 5.35,
+      "elite_template_score": 0.475,
+      "score": 5.35,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -289,6 +339,8 @@
       "team": "Man City",
       "price": 15.5,
       "predicted_points": 7.36,
+      "elite_template_score": 0.175,
+      "score": 7.36,
       "in_xi": true,
       "is_captain": true,
       "is_vice": false
@@ -300,6 +352,8 @@
       "team": "Brentford",
       "price": 8.0,
       "predicted_points": 5.27,
+      "elite_template_score": 0.125,
+      "score": 5.27,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -311,6 +365,8 @@
       "team": "Hull City",
       "price": 4.5,
       "predicted_points": 6.98,
+      "elite_template_score": 0.0,
+      "score": 6.98,
       "in_xi": true,
       "is_captain": false,
       "is_vice": false
@@ -322,6 +378,8 @@
       "team": "Coventry City",
       "price": 4.0,
       "predicted_points": 2.17,
+      "elite_template_score": 0.0,
+      "score": 2.17,
       "in_xi": false,
       "is_captain": false,
       "is_vice": false
@@ -333,6 +391,8 @@
       "team": "Coventry City",
       "price": 4.0,
       "predicted_points": 0.0,
+      "elite_template_score": 0.0,
+      "score": 0.0,
       "in_xi": false,
       "is_captain": false,
       "is_vice": false
@@ -344,6 +404,8 @@
       "team": "Spurs",
       "price": 4.5,
       "predicted_points": 0.01,
+      "elite_template_score": 0.0,
+      "score": 0.01,
       "in_xi": false,
       "is_captain": false,
       "is_vice": false
@@ -355,6 +417,8 @@
       "team": "Leeds",
       "price": 4.0,
       "predicted_points": 0.04,
+      "elite_template_score": 0.0,
+      "score": 0.04,
       "in_xi": false,
       "is_captain": false,
       "is_vice": false
@@ -362,5 +426,8 @@
   ],
   "season": "2026-27",
   "gameweek": 3,
-  "generated_at": "2026-09-01T18:27:17.905640+00:00"
+  "generated_at": "2026-09-01T18:45:00.692185+00:00",
+  "elite_weight": 0.0,
+  "elite_weight_status": "deferred",
+  "elite_players_covered": 88
 }

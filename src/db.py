@@ -133,6 +133,21 @@ CREATE TABLE IF NOT EXISTS explanations (
 );
 """
 
+CREATE_ELITE_SQUADS = """
+CREATE TABLE IF NOT EXISTS elite_squads (
+    season TEXT NOT NULL,
+    gameweek INTEGER NOT NULL,
+    player_id INTEGER NOT NULL,
+    picked_pct REAL,             -- fraction of sampled elite managers who own the player
+    captained_pct REAL,          -- fraction who captained them
+    elite_template_score REAL,   -- the value the optimiser blends in (currently = picked_pct)
+    sample_size INTEGER,
+    scraped_at TEXT NOT NULL,
+    PRIMARY KEY (season, gameweek, player_id),
+    FOREIGN KEY (player_id) REFERENCES players (player_id)
+);
+"""
+
 ALL_CREATE_STATEMENTS = (
     CREATE_PLAYERS,
     CREATE_PLAYER_GAMEWEEK_STATS,
@@ -140,6 +155,7 @@ ALL_CREATE_STATEMENTS = (
     CREATE_PREDICTIONS,
     CREATE_SQUADS,
     CREATE_EXPLANATIONS,
+    CREATE_ELITE_SQUADS,
 )
 
 # Additive columns for player_gameweek_stats, applied by migrate() to a DB that

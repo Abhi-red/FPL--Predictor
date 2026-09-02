@@ -56,6 +56,28 @@ EXPLANATION_MODEL: str = "claude-sonnet-4-6"
 # by at most this fraction, never replace it outright.
 ADJUSTMENT_CAP: float = 0.30
 
+# Elite-template blending. The optimiser scores a player as
+#   final_score = predicted_points * (1 + ELITE_WEIGHT * elite_template_score)
+# ELITE_WEIGHT is NOT hardcoded: src/optimize/tune_elite_weight.py sweeps these
+# candidates by walk-forward backtest and writes the winner to
+# data/elite_weight_config.json, which the optimiser reads at run time. 0.0 is
+# the mandatory control (pure stats, no elite signal) that every other weight is
+# measured against. See DECISIONS.md.
+ELITE_WEIGHT_CANDIDATES: tuple[float, ...] = (0.0, 0.05, 0.1, 0.15, 0.2, 0.3)
+
+# The sweep needs gameweeks that have BOTH elite ownership data and realized
+# results. Below this many, the tuner defers to ELITE_WEIGHT = 0.0 rather than
+# pretend it is tuned.
+ELITE_TUNE_MIN_GAMEWEEKS: int = 5
+
+# A candidate only beats the 0.0 control if it is ahead by more than this many
+# realized points per gameweek; within this band, prefer the simpler weight.
+ELITE_TUNE_NOISE_PTS: float = 0.25
+
+# Elite ownership is sampled from the top of FPL's overall league (id 314).
+ELITE_LEAGUE_ID: int = 314
+ELITE_SAMPLE_SIZE: int = 100
+
 # FPL squad rules, used by the ILP optimizer and its tests.
 BUDGET: int = 1000  # total squad cost ceiling, in tenths of a million (£100.0m)
 SQUAD: dict[str, int] = {"GK": 2, "DEF": 5, "MID": 5, "FWD": 3}  # 15-man squad
