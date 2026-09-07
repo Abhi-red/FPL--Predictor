@@ -1,17 +1,17 @@
-# Suggested squad - 2026-27 GW3
+# Suggested squad - 2026-27 GW4
 
-The squad uses a 3-4-3 shape and spends heavily on a Man City triple-up (Foden, Cherki, Haaland) while keeping the defensive and bench budget extremely lean, with two Coventry defenders and a Hull goalkeeper on the bench purely as placeholders. Elite ownership played no role whatsoever in selection — the elite_weight is 0.0 with no tuning config applied, so every decision is driven purely by the points model and any news flags.
+A 3-5-2 squad costing £93.9m and projecting 70.46 points, built around a heavy Arsenal and Chelsea double-up across defence and midfield. Elite ownership was completely ignored — the elite_weight is 0.0 with no tuning config in place, so every selection is driven purely by the points model and injury/availability news.
 
-**Formation** 3-4-3 | **Cost** GBP98.5m | **Projected** 73.04 pts
+**Formation** 3-5-2 | **Cost** GBP93.9m | **Projected** 70.46 pts
 
-**Captain:** Foden | **Vice:** Haaland  
-Foden is captained on the back of the squad's highest predicted points (7.59), meaning his score is doubled for maximum upside; Haaland (7.46 predicted) is the logical vice, given he is the second-highest scorer and a reliable goal threat for Man City.
+**Captain:** Verbruggen | **Vice:** Gabriel  
+Verbruggen is the captain despite being a goalkeeper, reflecting his model-high predicted_points of 6.99 — the single highest individual score in the starting XI. Gabriel (6.71 predicted points) is the logical vice given his defensive returns from a strong Arsenal defensive unit.
 
 _Elite weight: 0.0 (no-config). Elite-template weight 0.0 (no tuning config yet); squad is pure model + news._
 
 ## Standout picks
 
-- **Tzolakis (Hull City GK)** - His predicted_points of 6.72 is the third-highest in the entire starting XI despite costing just £4.5m — the model clearly sees a very favourable clean-sheet or save-point opportunity this week, and his elite_template_score of 0.0 means this is a pure model-driven differential call.
-- **Thiago (Brentford FWD)** - At £8.0m he posts a solid 6.20 predicted points and carries a modest elite_template_score of 0.11, suggesting a small but non-zero number of top managers also see value here — the model rates him as the most productive of the three forwards after Haaland.
-- **Foden (Man City MID)** - The squad's top scorer at 7.59 predicted points and priced at just £7.0m, making him exceptional value as captain pick; his elite_template_score of only 0.03 means he is almost entirely a model selection rather than a crowd-follow.
-- **Hill (Bournemouth DEF)** - At £5.5m he is the highest-scoring defender in the XI (5.50 predicted points) and has an elite_template_score of 0.0, flagging him as a differential the model identified independently — he anchors the cheap defensive line alongside fellow Bournemouth man Silva.
+- **Verbruggen** - At just £4.5m he posts the highest predicted points in the XI at 6.99, making him the model's standout value pick and the unusual but statistically justified captain choice. His elite_template_score of 0.22 shows some elite manager backing too.
+- **Rogers** - At £7.6m Rogers delivers 6.64 predicted points — the second-highest in the squad — yet carries only a 0.06 elite_template_score, meaning the model is significantly higher on him than elite managers are. A bold, model-driven differential.
+- **Calvert-Lewin** - Brought in at just £6.0m for Leeds with 5.54 predicted points, he offers strong value in the forward line and is almost entirely absent from elite squads (0.05 score), making him a pure model selection with good price-to-output ratio.
+- **Thiago** - At £7.9m Thiago is the most expensive forward and has the joint-highest elite_template_score in the squad at 0.50, yet his predicted_points of 4.82 are the lowest in the starting XI — the one instance where elite ownership and model points are somewhat misaligned, though the elite signal was not factored in.
