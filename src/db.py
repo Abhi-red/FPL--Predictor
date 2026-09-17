@@ -148,6 +148,21 @@ CREATE TABLE IF NOT EXISTS elite_squads (
 );
 """
 
+CREATE_PREDICTION_ACCURACY = """
+CREATE TABLE IF NOT EXISTS prediction_accuracy (
+    season TEXT NOT NULL,
+    gameweek INTEGER NOT NULL,
+    position TEXT NOT NULL,  -- GK/DEF/MID/FWD, or 'ALL' for the combined row
+    n INTEGER NOT NULL,
+    mae_raw REAL,
+    rmse_raw REAL,
+    mae_adjusted REAL,
+    rmse_adjusted REAL,
+    computed_at TEXT NOT NULL,
+    PRIMARY KEY (season, gameweek, position)
+);
+"""
+
 ALL_CREATE_STATEMENTS = (
     CREATE_PLAYERS,
     CREATE_PLAYER_GAMEWEEK_STATS,
@@ -156,6 +171,7 @@ ALL_CREATE_STATEMENTS = (
     CREATE_SQUADS,
     CREATE_EXPLANATIONS,
     CREATE_ELITE_SQUADS,
+    CREATE_PREDICTION_ACCURACY,
 )
 
 # Additive columns for player_gameweek_stats, applied by migrate() to a DB that

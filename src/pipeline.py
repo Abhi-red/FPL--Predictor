@@ -25,7 +25,7 @@ from db import get_connection, init_db  # noqa: E402
 
 MODELS_DIR = Path(__file__).resolve().parent.parent / "data" / "models"
 SITE_DATA = Path(__file__).resolve().parent.parent / "site" / "data"
-NON_FATAL = {"embed", "adjust", "fetch_elite", "tune_elite_weight"}
+NON_FATAL = {"embed", "adjust", "fetch_elite", "tune_elite_weight", "track_accuracy"}
 
 # Set by stage_ensure_models when it actually retrains; gates the periodic
 # elite-weight retune below.
@@ -61,6 +61,12 @@ def stage_fetch_gameweek_stats() -> None:
     from ingest.fetch_gameweek_stats import main as fetch_gw
 
     fetch_gw()
+
+
+def stage_track_accuracy() -> None:
+    from models.track_accuracy import main as track_accuracy_main
+
+    track_accuracy_main()
 
 
 def stage_build_features() -> None:
@@ -179,10 +185,12 @@ def stage_export_site_json() -> None:
     print(f"exported {len(players)} players for GW{gameweek}")
 
 
-# The always-run weekly path: fetch -> features -> models -> predict -> news ->
-# elite ownership -> optimise with the STORED elite weight -> explain -> publish.
+# The always-run weekly path: fetch -> score last week's predictions against the
+# results that just came in -> features -> models -> predict -> news -> elite
+# ownership -> optimise with the STORED elite weight -> explain -> publish.
 STAGES = [
     ("fetch_gameweek_stats", stage_fetch_gameweek_stats),
+    ("track_accuracy", stage_track_accuracy),
     ("build_features", stage_build_features),
     ("ensure_models", stage_ensure_models),
     ("predict", stage_predict),
