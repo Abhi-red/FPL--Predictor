@@ -105,6 +105,7 @@ main { max-width: 1040px; margin: 0 auto; padding: 16px; }
 .card:hover { border-color: var(--accent); }
 .card .name { font-weight: 700; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .card .meta { font-size: 11px; color: var(--ink-soft); }
+.card .opp { font-size: 11px; color: var(--ink-soft); opacity: 0.85; }
 .card .pts { margin-top: 4px; font-weight: 800; color: var(--accent-ink); }
 @media (prefers-color-scheme: dark) { .card .pts { color: var(--accent); } }
 .card .tag {

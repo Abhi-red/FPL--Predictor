@@ -30,6 +30,14 @@ function pointsOf(p) {
 function fmt(n, d = 1) {
   return n === null || n === undefined || Number.isNaN(n) ? "–" : Number(n).toFixed(d);
 }
+function venueTag(p) {
+  return p.was_home == 1 ? "H" : p.was_home == 0 ? "A" : "";
+}
+function oppLabel(p) {
+  if (!p.opponent_team) return "–";
+  const venue = venueTag(p);
+  return venue ? `${p.opponent_team} (${venue})` : p.opponent_team;
+}
 
 // ---- Squad view -----------------------------------------------------------
 function renderSquad() {
@@ -73,6 +81,7 @@ function playerCard(p) {
     ${tag}
     <div class="name">${p.web_name}</div>
     <div class="meta">${p.team} · £${fmt(p.price, 1)}</div>
+    <div class="opp">${oppLabel(p)}</div>
     <div class="pts">${fmt(p.predicted_points, 1)}</div>
   </div>`;
 }
@@ -113,13 +122,14 @@ function renderPlayers() {
       <td>${p.web_name}</td>
       <td>${p.team}</td>
       <td><span class="pill">${p.position}</span></td>
+      <td>${oppLabel(p)}</td>
       <td class="num">${fmt(p.price, 1)}</td>
       <td class="num">${fmt(p.raw_points, 2)}</td>
       <td class="num">${fmt(pointsOf(p), 2)}</td>
       <td>${p.adjustment_reason ? '<span class="pill flag">flag</span>' : ""}</td>
     </tr>`
       )
-      .join("") || '<tr><td colspan="7" class="empty">No players.</td></tr>';
+      .join("") || '<tr><td colspan="8" class="empty">No players.</td></tr>';
 
   body.querySelectorAll("tr[data-id]").forEach((tr) => {
     tr.addEventListener("click", () => openDrawer(Number(tr.dataset.id)));
@@ -143,8 +153,8 @@ function openDrawer(id) {
       ${stat("Pts / last 5", fmt(p.roll5_total_points, 2))}
       ${stat("Mins / last 5", fmt(p.roll5_minutes_played, 0))}
       ${stat("Start rate", p.start_rate_5 == null ? "–" : Math.round(p.start_rate_5 * 100) + "%")}
+      ${stat("Opponent", oppLabel(p))}
       ${stat("Fixture diff", fmt(p.fdr, 1))}
-      ${stat("Venue", p.was_home == 1 ? "Home" : p.was_home == 0 ? "Away" : "–")}
       ${stat("Elite own.", p.elite_template_score == null ? "–" : Math.round(p.elite_template_score * 100) + "%")}
     </div>
     ${

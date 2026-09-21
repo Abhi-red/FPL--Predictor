@@ -227,7 +227,10 @@ def add_features(df: pd.DataFrame, strengths: dict) -> pd.DataFrame:
 # --------------------------------------------------------------------------- #
 # Build / persist
 # --------------------------------------------------------------------------- #
-_KEEP_META = ["player_id", "season", "gameweek", "position", "team", "web_name"]
+_KEEP_META = [
+    "player_id", "season", "gameweek", "position", "team", "web_name",
+    "opponent_team",
+]
 
 
 def build() -> pd.DataFrame:

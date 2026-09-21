@@ -150,7 +150,7 @@ def stage_export_site_json() -> None:
                        pr.raw_points, pr.adjusted_points,
                        pr.adjustment_factor, pr.adjustment_reason, pr.news_url,
                        f.roll5_total_points, f.roll5_minutes_played,
-                       f.start_rate_5, f.form_ewm, f.fdr, f.was_home,
+                       f.start_rate_5, f.form_ewm, f.fdr, f.was_home, f.opponent_team,
                        e.elite_template_score
                 FROM players p
                 LEFT JOIN predictions pr

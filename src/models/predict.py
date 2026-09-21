@@ -32,7 +32,10 @@ from features.build_features import (  # noqa: E402
     strengths_by_season,
 )
 
-_META_COLS = ["player_id", "season", "gameweek", "position", "team", "web_name"]
+_META_COLS = [
+    "player_id", "season", "gameweek", "position", "team", "web_name",
+    "opponent_team",
+]
 
 MODELS_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "models"
 PREDICTIONS_JSON = Path(__file__).resolve().parent.parent.parent / "data" / "predictions_raw.json"
@@ -199,7 +202,7 @@ def main() -> None:
         upcoming.to_sql("player_features", conn, if_exists="append", index=False)
 
     export = (
-        matrix[["player_id", "web_name", "position", "team", "price", "raw_points"]]
+        matrix[["player_id", "web_name", "position", "team", "opponent_team", "was_home", "price", "raw_points"]]
         .rename(columns={"price": "now_cost"})
         .sort_values("raw_points", ascending=False)
     )

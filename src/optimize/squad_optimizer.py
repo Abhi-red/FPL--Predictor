@@ -119,6 +119,8 @@ def optimize(players: list[dict]) -> dict:
             "in_xi": i in starters,
             "is_captain": i == captain_id,
             "is_vice": i == vice_id,
+            "opponent_team": p.get("opponent_team"),
+            "was_home": p.get("was_home"),
         }
 
     xi_players = sorted(
@@ -178,7 +180,8 @@ def load_candidates() -> tuple[int, list[dict]]:
             """
             SELECT pr.player_id, p.web_name, p.position, p.team, p.now_cost AS price,
                    COALESCE(pr.adjusted_points, pr.raw_points) AS predicted_points,
-                   COALESCE(e.elite_template_score, 0.0)       AS elite_template_score
+                   COALESCE(e.elite_template_score, 0.0)       AS elite_template_score,
+                   f.opponent_team, f.was_home
             FROM predictions pr
             JOIN players p ON p.player_id = pr.player_id
             LEFT JOIN elite_squads e
@@ -187,6 +190,9 @@ def load_candidates() -> tuple[int, list[dict]]:
                       SELECT MAX(e2.gameweek) FROM elite_squads e2
                       WHERE e2.season = pr.season AND e2.gameweek <= pr.gameweek
                   )
+            LEFT JOIN player_features f
+                   ON f.player_id = pr.player_id AND f.season = pr.season
+                  AND f.gameweek = pr.gameweek
             WHERE pr.season = ? AND pr.gameweek = ?
               AND p.now_cost IS NOT NULL AND pr.raw_points IS NOT NULL
             """,
