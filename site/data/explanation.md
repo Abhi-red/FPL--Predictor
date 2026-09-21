@@ -1,17 +1,17 @@
-# Suggested squad - 2026-27 GW5
+# Suggested squad - 2026-27 GW6
 
-The optimiser has deployed a bold 5-4-1 shape, investing heavily in a five-man defensive block and four midfielders to free up budget across the squad. With a total cost of £98.0m and projected points of 74.73, this is a points-model-first squad — elite ownership had zero influence on selection (elite_weight 0.0, no tuning config in place), meaning players like Calafiori (elite_template_score 0.70) and Gibbs-White (0.41) were chosen purely on predicted output, not because top managers own them.
+This is a 4-5-1 squad built entirely on predicted points and news signals, with zero weighting given to elite manager ownership — the elite_weight is 0.0 due to no tuning config being set, so the squad is purely model-driven. Arsenal are heavily represented with three starters (Gabriel, Calafiori, Saka), while Brighton provide two assets (De Cuyper, Groß) at budget-friendly prices. The bench is effectively fodder, with two forwards (Mheuka, Salia) each projected at just 0.06 points, existing purely to free up budget for the starting eleven.
 
-**Formation** 5-4-1 | **Cost** £98.0m | **Projected** 74.73 pts
+**Formation** 4-5-1 | **Cost** £99.8m | **Projected** 71.8 pts
 
-**Captain:** Saka | **Vice:** B.Fernandes  
-Saka and B.Fernandes share the top predicted points in the squad at 7.68 each, making either a legitimate captain choice; Saka gets the armband — likely on fixture or consistency grounds — while Fernandes is the logical vice given his identical projection.
+**Captain:** Saka | **Vice:** Gabriel  
+Saka leads the armband as the highest predicted-points starter at 7.26, giving him a projected 14.52 with the captain multiplier — a reasonable model-backed choice despite his relatively low elite ownership of 0.16. Gabriel is the vice-captain pick at 7.1 predicted points, and as a centre-back with attacking threat he offers strong fallback value if Saka doesn't play.
 
 _Elite weight: 0.0 (no-config). Elite-template weight 0.0 (no tuning config yet); squad is pure model + news._
 
 ## Standout picks
 
-- **Calafiori** - At just £5.8m he posts a predicted 6.28 points, making him one of the best value defenders in the squad. His elite_template_score of 0.70 also shows top managers have noticed him, though that signal was not factored in here — the model found him independently.
-- **Tarkowski** - The highest-scoring defender in the XI at 6.76 predicted points, and with an elite_template_score of 0.46 he is owned by nearly half of elite managers — again, validation the model arrived at without using the elite signal.
-- **Gibbs-White** - A £8.0m midfielder projecting 6.38 points with a solid elite_template_score of 0.41; he adds Nottingham Forest midfield coverage and represents strong mid-price value that the pure points model has identified.
-- **Saka** - The captain pick at £9.5m with 7.68 predicted points (pre-captaincy double), offering Arsenal's attacking premium at a relatively modest price compared to the £12.0m Fernandes who matches his raw projection.
+- **Tarkowski** - The model's second-highest defender at 6.75 predicted points and priced at just £6.1m, Tarkowski also carries meaningful elite backing at 0.46 — though that signal was not factored in here, it does independently validate the pick.
+- **Groß** - At £5.8m Groß offers 5.62 predicted points and is held by 65% of elite managers, making him one of the most cost-efficient differentials in the squad — although the elite signal was ignored, both angles point in the same direction.
+- **A.Becker** - The Liverpool goalkeeper is projected at 5.29 points for just £5.5m, making him the model's preferred budget keeper option and a solid premium-over-bench choice despite negligible elite ownership of 0.01.
+- **Calafiori** - Priced at £5.8m with 5.54 predicted points, Calafiori also has an elite_template_score of 0.70 — the highest in the squad — meaning 70% of elite managers own him. The model picked him on merit alone since elite weight was zero, but the convergence adds confidence.

@@ -1,29 +1,29 @@
 {
   "season": "2026-27",
-  "gameweek": 5,
-  "generated_at": "2026-09-21T13:48:07.905405+00:00",
+  "gameweek": 6,
+  "generated_at": "2026-09-21T17:25:10.623805+00:00",
   "source": "claude-sonnet-4-6",
   "elite_weight": 0.0,
   "elite_weight_status": "no-config",
   "elite_note": "Elite-template weight 0.0 (no tuning config yet); squad is pure model + news.",
-  "summary": "The optimiser has deployed a bold 5-4-1 shape, investing heavily in a five-man defensive block and four midfielders to free up budget across the squad. With a total cost of \u00a398.0m and projected points of 74.73, this is a points-model-first squad \u2014 elite ownership had zero influence on selection (elite_weight 0.0, no tuning config in place), meaning players like Calafiori (elite_template_score 0.70) and Gibbs-White (0.41) were chosen purely on predicted output, not because top managers own them.",
-  "captain_rationale": "Saka and B.Fernandes share the top predicted points in the squad at 7.68 each, making either a legitimate captain choice; Saka gets the armband \u2014 likely on fixture or consistency grounds \u2014 while Fernandes is the logical vice given his identical projection.",
+  "summary": "This is a 4-5-1 squad built entirely on predicted points and news signals, with zero weighting given to elite manager ownership \u2014 the elite_weight is 0.0 due to no tuning config being set, so the squad is purely model-driven. Arsenal are heavily represented with three starters (Gabriel, Calafiori, Saka), while Brighton provide two assets (De Cuyper, Gro\u00df) at budget-friendly prices. The bench is effectively fodder, with two forwards (Mheuka, Salia) each projected at just 0.06 points, existing purely to free up budget for the starting eleven.",
+  "captain_rationale": "Saka leads the armband as the highest predicted-points starter at 7.26, giving him a projected 14.52 with the captain multiplier \u2014 a reasonable model-backed choice despite his relatively low elite ownership of 0.16. Gabriel is the vice-captain pick at 7.1 predicted points, and as a centre-back with attacking threat he offers strong fallback value if Saka doesn't play.",
   "standout_picks": [
     {
-      "player": "Calafiori",
-      "reason": "At just \u00a35.8m he posts a predicted 6.28 points, making him one of the best value defenders in the squad. His elite_template_score of 0.70 also shows top managers have noticed him, though that signal was not factored in here \u2014 the model found him independently."
-    },
-    {
       "player": "Tarkowski",
-      "reason": "The highest-scoring defender in the XI at 6.76 predicted points, and with an elite_template_score of 0.46 he is owned by nearly half of elite managers \u2014 again, validation the model arrived at without using the elite signal."
+      "reason": "The model's second-highest defender at 6.75 predicted points and priced at just \u00a36.1m, Tarkowski also carries meaningful elite backing at 0.46 \u2014 though that signal was not factored in here, it does independently validate the pick."
     },
     {
-      "player": "Gibbs-White",
-      "reason": "A \u00a38.0m midfielder projecting 6.38 points with a solid elite_template_score of 0.41; he adds Nottingham Forest midfield coverage and represents strong mid-price value that the pure points model has identified."
+      "player": "Gro\u00df",
+      "reason": "At \u00a35.8m Gro\u00df offers 5.62 predicted points and is held by 65% of elite managers, making him one of the most cost-efficient differentials in the squad \u2014 although the elite signal was ignored, both angles point in the same direction."
     },
     {
-      "player": "Saka",
-      "reason": "The captain pick at \u00a39.5m with 7.68 predicted points (pre-captaincy double), offering Arsenal's attacking premium at a relatively modest price compared to the \u00a312.0m Fernandes who matches his raw projection."
+      "player": "A.Becker",
+      "reason": "The Liverpool goalkeeper is projected at 5.29 points for just \u00a35.5m, making him the model's preferred budget keeper option and a solid premium-over-bench choice despite negligible elite ownership of 0.01."
+    },
+    {
+      "player": "Calafiori",
+      "reason": "Priced at \u00a35.8m with 5.54 predicted points, Calafiori also has an elite_template_score of 0.70 \u2014 the highest in the squad \u2014 meaning 70% of elite managers own him. The model picked him on merit alone since elite weight was zero, but the convergence adds confidence."
     }
   ]
 }
