@@ -157,8 +157,11 @@ def stage_export_site_json() -> None:
                        ON pr.player_id = p.player_id AND pr.season = :season
                       AND pr.gameweek = :gw
                 LEFT JOIN player_features f
-                       ON f.player_id = p.player_id AND f.season = :season
-                      AND f.gameweek = :gw
+                       ON f.rowid = (
+                           SELECT MIN(f2.rowid) FROM player_features f2
+                           WHERE f2.player_id = p.player_id AND f2.season = :season
+                             AND f2.gameweek = :gw
+                       )
                 LEFT JOIN elite_squads e
                        ON e.player_id = p.player_id AND e.season = :season
                       AND e.gameweek = (

@@ -102,8 +102,22 @@ def build_upcoming_matrix(gameweek: int, bootstrap: dict) -> pd.DataFrame:
             conn,
         )
 
+    # A player can already have a real player_gameweek_stats row for `gameweek`
+    # if fetch_gameweek_stats.py ingested it before bootstrap's event.finished
+    # flag flipped (e.g. early kickoffs done, gameweek not yet fully wrapped
+    # up). Building a synthetic row for them too would give them two rows for
+    # the same (player_id, season, gameweek) key downstream. Skip those players
+    # - their real result is already known, nothing to predict.
+    already_played = set(
+        stats.loc[
+            (stats["season"] == SEASON) & (stats["gameweek"] == gameweek), "player_id"
+        ]
+    )
+
     synthetic_rows: list[dict] = []
     for player in players.itertuples(index=False):
+        if player.player_id in already_played:
+            continue
         fixture = fixtures.get(player.team)
         if fixture is None:
             continue  # blank gameweek for this player's club
@@ -126,7 +140,12 @@ def build_upcoming_matrix(gameweek: int, bootstrap: dict) -> pd.DataFrame:
     synthetic = pd.DataFrame(synthetic_rows, columns=list(stats.columns))
     combined = (
         pd.concat([stats, synthetic], ignore_index=True)
-        .sort_values(["player_id", "season", "gameweek"])
+        # Real rows come first (from `stats`), so keep="first" prefers them
+        # over a synthetic placeholder on any remaining (player_id, season,
+        # gameweek) collision - belt-and-braces alongside the already_played
+        # skip above.
+        .drop_duplicates(subset=["player_id", "season", "gameweek"], keep="first")
+        .sort_values(["player_id", "season", "gameweek"], kind="stable")
         .reset_index(drop=True)
     )
     strengths = strengths_by_season(sorted(combined["season"].unique()))

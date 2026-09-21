@@ -191,8 +191,11 @@ def load_candidates() -> tuple[int, list[dict]]:
                       WHERE e2.season = pr.season AND e2.gameweek <= pr.gameweek
                   )
             LEFT JOIN player_features f
-                   ON f.player_id = pr.player_id AND f.season = pr.season
-                  AND f.gameweek = pr.gameweek
+                   ON f.rowid = (
+                       SELECT MIN(f2.rowid) FROM player_features f2
+                       WHERE f2.player_id = pr.player_id AND f2.season = pr.season
+                         AND f2.gameweek = pr.gameweek
+                   )
             WHERE pr.season = ? AND pr.gameweek = ?
               AND p.now_cost IS NOT NULL AND pr.raw_points IS NOT NULL
             """,
