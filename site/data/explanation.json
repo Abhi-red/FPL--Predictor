@@ -1,29 +1,29 @@
 {
   "season": "2026-27",
   "gameweek": 5,
-  "generated_at": "2026-09-21T13:20:30.356651+00:00",
+  "generated_at": "2026-09-21T13:48:07.905405+00:00",
   "source": "claude-sonnet-4-6",
   "elite_weight": 0.0,
   "elite_weight_status": "no-config",
   "elite_note": "Elite-template weight 0.0 (no tuning config yet); squad is pure model + news.",
-  "summary": "The squad runs a 5-4-1 shape, investing heavily in Arsenal and Nott'm Forest assets to free up budget across the backline, where five defenders are used to pack in value picks. Elite ownership had zero influence on selection \u2014 the elite weight is explicitly set to 0.0 with no tuning config \u2014 so every decision here is driven purely by the points model and any injury/news flags.",
-  "captain_rationale": "Saka and B.Fernandes share the joint-highest predicted points in the squad at 7.68 each. Saka gets the armband, likely for Arsenal's home advantage and his consistent attacking returns, while Fernandes is a credible vice at the same ceiling given his set-piece and creative involvement at Man Utd.",
+  "summary": "The optimiser has deployed a bold 5-4-1 shape, investing heavily in a five-man defensive block and four midfielders to free up budget across the squad. With a total cost of \u00a398.0m and projected points of 74.73, this is a points-model-first squad \u2014 elite ownership had zero influence on selection (elite_weight 0.0, no tuning config in place), meaning players like Calafiori (elite_template_score 0.70) and Gibbs-White (0.41) were chosen purely on predicted output, not because top managers own them.",
+  "captain_rationale": "Saka and B.Fernandes share the top predicted points in the squad at 7.68 each, making either a legitimate captain choice; Saka gets the armband \u2014 likely on fixture or consistency grounds \u2014 while Fernandes is the logical vice given his identical projection.",
   "standout_picks": [
     {
       "player": "Calafiori",
-      "reason": "At just \u00a35.8m he posts a strong 6.28 predicted points and carries the highest elite template score in the squad at 0.70 \u2014 meaning 70% of top managers own him \u2014 making him excellent value in a 5-man defence."
+      "reason": "At just \u00a35.8m he posts a predicted 6.28 points, making him one of the best value defenders in the squad. His elite_template_score of 0.70 also shows top managers have noticed him, though that signal was not factored in here \u2014 the model found him independently."
     },
     {
       "player": "Tarkowski",
-      "reason": "The model's top-scoring defender at 6.76 predicted points for only \u00a36.1m, and nearly half of elite managers (0.46 elite template score) also hold him, suggesting broad confidence in his clean-sheet and set-piece potential."
+      "reason": "The highest-scoring defender in the XI at 6.76 predicted points, and with an elite_template_score of 0.46 he is owned by nearly half of elite managers \u2014 again, validation the model arrived at without using the elite signal."
     },
     {
       "player": "Gibbs-White",
-      "reason": "At \u00a38.0m he delivers a solid 6.38 predicted points and an elite template score of 0.42, making him one of the more consensus midfield picks in this squad despite the model-only approach."
+      "reason": "A \u00a38.0m midfielder projecting 6.38 points with a solid elite_template_score of 0.41; he adds Nottingham Forest midfield coverage and represents strong mid-price value that the pure points model has identified."
     },
     {
-      "player": "B.Fernandes",
-      "reason": "Priced at \u00a312.0m he matches Saka's 7.68 predicted points, justifying his premium tag as vice-captain and the squad's most expensive asset \u2014 the model sees him as a genuine ceiling pick this gameweek."
+      "player": "Saka",
+      "reason": "The captain pick at \u00a39.5m with 7.68 predicted points (pre-captaincy double), offering Arsenal's attacking premium at a relatively modest price compared to the \u00a312.0m Fernandes who matches his raw projection."
     }
   ]
 }

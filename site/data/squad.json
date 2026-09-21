@@ -13,7 +13,9 @@
     "score": 7.68,
     "in_xi": true,
     "is_captain": true,
-    "is_vice": false
+    "is_vice": false,
+    "opponent_team": "Brighton",
+    "was_home": 0
   },
   "vice": {
     "player_id": 141746,
@@ -22,11 +24,13 @@
     "team": "Man Utd",
     "price": 12.0,
     "predicted_points": 7.68,
-    "elite_template_score": 0.22,
+    "elite_template_score": 0.24,
     "score": 7.68,
     "in_xi": true,
     "is_captain": false,
-    "is_vice": true
+    "is_vice": true,
+    "opponent_team": "Fulham",
+    "was_home": 0
   },
   "xi": [
     {
@@ -40,7 +44,9 @@
       "score": 6.76,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Ipswich Town",
+      "was_home": 1
     },
     {
       "player_id": 226597,
@@ -53,7 +59,9 @@
       "score": 6.41,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Brighton",
+      "was_home": 0
     },
     {
       "player_id": 466075,
@@ -66,7 +74,9 @@
       "score": 6.28,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Brighton",
+      "was_home": 0
     },
     {
       "player_id": 215136,
@@ -79,7 +89,9 @@
       "score": 5.19,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Coventry City",
+      "was_home": 1
     },
     {
       "player_id": 220237,
@@ -92,7 +104,9 @@
       "score": 5.12,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Hull City",
+      "was_home": 1
     },
     {
       "player_id": 223340,
@@ -105,7 +119,9 @@
       "score": 7.68,
       "in_xi": true,
       "is_captain": true,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Brighton",
+      "was_home": 0
     },
     {
       "player_id": 141746,
@@ -114,11 +130,13 @@
       "team": "Man Utd",
       "price": 12.0,
       "predicted_points": 7.68,
-      "elite_template_score": 0.22,
+      "elite_template_score": 0.24,
       "score": 7.68,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": true
+      "is_vice": true,
+      "opponent_team": "Fulham",
+      "was_home": 0
     },
     {
       "player_id": 222531,
@@ -127,11 +145,13 @@
       "team": "Nott'm Forest",
       "price": 8.0,
       "predicted_points": 6.38,
-      "elite_template_score": 0.42,
+      "elite_template_score": 0.41,
       "score": 6.38,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Coventry City",
+      "was_home": 1
     },
     {
       "player_id": 446008,
@@ -140,11 +160,13 @@
       "team": "Man Utd",
       "price": 7.9,
       "predicted_points": 5.22,
-      "elite_template_score": 0.14,
+      "elite_template_score": 0.13,
       "score": 5.22,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Fulham",
+      "was_home": 0
     },
     {
       "player_id": 502500,
@@ -157,7 +179,9 @@
       "score": 5.13,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Chelsea",
+      "was_home": 1
     },
     {
       "player_id": 116535,
@@ -170,7 +194,9 @@
       "score": 5.2,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Bournemouth",
+      "was_home": 0
     }
   ],
   "bench": [
@@ -185,7 +211,9 @@
       "score": 0.08,
       "in_xi": false,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Fulham",
+      "was_home": 0
     },
     {
       "player_id": 601767,
@@ -198,7 +226,9 @@
       "score": 0.07,
       "in_xi": false,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Hull City",
+      "was_home": 1
     },
     {
       "player_id": 567119,
@@ -211,7 +241,9 @@
       "score": 0.04,
       "in_xi": false,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Brentford",
+      "was_home": 0
     },
     {
       "player_id": 169593,
@@ -224,7 +256,9 @@
       "score": 0.03,
       "in_xi": false,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Leeds",
+      "was_home": 0
     }
   ],
   "squad": [
@@ -239,7 +273,9 @@
       "score": 6.76,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Ipswich Town",
+      "was_home": 1
     },
     {
       "player_id": 226597,
@@ -252,7 +288,9 @@
       "score": 6.41,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Brighton",
+      "was_home": 0
     },
     {
       "player_id": 466075,
@@ -265,7 +303,9 @@
       "score": 6.28,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Brighton",
+      "was_home": 0
     },
     {
       "player_id": 215136,
@@ -278,7 +318,9 @@
       "score": 5.19,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Coventry City",
+      "was_home": 1
     },
     {
       "player_id": 220237,
@@ -291,7 +333,9 @@
       "score": 5.12,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Hull City",
+      "was_home": 1
     },
     {
       "player_id": 223340,
@@ -304,7 +348,9 @@
       "score": 7.68,
       "in_xi": true,
       "is_captain": true,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Brighton",
+      "was_home": 0
     },
     {
       "player_id": 141746,
@@ -313,11 +359,13 @@
       "team": "Man Utd",
       "price": 12.0,
       "predicted_points": 7.68,
-      "elite_template_score": 0.22,
+      "elite_template_score": 0.24,
       "score": 7.68,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": true
+      "is_vice": true,
+      "opponent_team": "Fulham",
+      "was_home": 0
     },
     {
       "player_id": 222531,
@@ -326,11 +374,13 @@
       "team": "Nott'm Forest",
       "price": 8.0,
       "predicted_points": 6.38,
-      "elite_template_score": 0.42,
+      "elite_template_score": 0.41,
       "score": 6.38,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Coventry City",
+      "was_home": 1
     },
     {
       "player_id": 446008,
@@ -339,11 +389,13 @@
       "team": "Man Utd",
       "price": 7.9,
       "predicted_points": 5.22,
-      "elite_template_score": 0.14,
+      "elite_template_score": 0.13,
       "score": 5.22,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Fulham",
+      "was_home": 0
     },
     {
       "player_id": 502500,
@@ -356,7 +408,9 @@
       "score": 5.13,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Chelsea",
+      "was_home": 1
     },
     {
       "player_id": 116535,
@@ -369,7 +423,9 @@
       "score": 5.2,
       "in_xi": true,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Bournemouth",
+      "was_home": 0
     },
     {
       "player_id": 519913,
@@ -382,7 +438,9 @@
       "score": 0.08,
       "in_xi": false,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Fulham",
+      "was_home": 0
     },
     {
       "player_id": 601767,
@@ -395,7 +453,9 @@
       "score": 0.07,
       "in_xi": false,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Hull City",
+      "was_home": 1
     },
     {
       "player_id": 567119,
@@ -408,7 +468,9 @@
       "score": 0.04,
       "in_xi": false,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Brentford",
+      "was_home": 0
     },
     {
       "player_id": 169593,
@@ -421,13 +483,15 @@
       "score": 0.03,
       "in_xi": false,
       "is_captain": false,
-      "is_vice": false
+      "is_vice": false,
+      "opponent_team": "Leeds",
+      "was_home": 0
     }
   ],
   "season": "2026-27",
   "gameweek": 5,
-  "generated_at": "2026-09-21T13:20:14.367472+00:00",
+  "generated_at": "2026-09-21T13:47:53.666395+00:00",
   "elite_weight": 0.0,
   "elite_weight_status": "no-config",
-  "elite_players_covered": 151
+  "elite_players_covered": 306
 }
