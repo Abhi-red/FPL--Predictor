@@ -1,29 +1,29 @@
 {
   "season": "2026-27",
-  "gameweek": 4,
-  "generated_at": "2026-09-14T13:21:21.786025+00:00",
+  "gameweek": 5,
+  "generated_at": "2026-09-21T13:20:30.356651+00:00",
   "source": "claude-sonnet-4-6",
   "elite_weight": 0.0,
   "elite_weight_status": "no-config",
   "elite_note": "Elite-template weight 0.0 (no tuning config yet); squad is pure model + news.",
-  "summary": "A 4-5-1 squad costing \u00a399.1m and projecting 69.03 points, built entirely on the points model with zero influence from elite ownership \u2014 the elite_weight is 0.0 due to no tuning config, so elite_template_scores played no role in selection whatsoever. The shape leans heavily on midfield, with three Arsenal assets in defence and a budget-conscious single striker. The bench is thin on quality, with Watkins (2.68 predicted points) and Kostoulas (3.99) as the only realistic cover, suggesting the model is very confident in the starting XI.",
-  "captain_rationale": "Bruno Fernandes captains with the highest predicted points in the XI at 6.52, making him the model's top return candidate despite a relatively modest elite_template_score of 0.30. Rogers (6.38 predicted points, elite_template_score 0.73) is a logical vice \u2014 she offers nearly the same ceiling and is widely held among top managers.",
+  "summary": "The squad runs a 5-4-1 shape, investing heavily in Arsenal and Nott'm Forest assets to free up budget across the backline, where five defenders are used to pack in value picks. Elite ownership had zero influence on selection \u2014 the elite weight is explicitly set to 0.0 with no tuning config \u2014 so every decision here is driven purely by the points model and any injury/news flags.",
+  "captain_rationale": "Saka and B.Fernandes share the joint-highest predicted points in the squad at 7.68 each. Saka gets the armband, likely for Arsenal's home advantage and his consistent attacking returns, while Fernandes is a credible vice at the same ceiling given his set-piece and creative involvement at Man Utd.",
   "standout_picks": [
     {
       "player": "Calafiori",
-      "reason": "The model's top-scoring defender at 6.2 predicted points and backed by an elite_template_score of 0.84 \u2014 even though elite ownership didn't drive selection, 84% of elite managers also hold him, suggesting strong consensus on his attacking output for Arsenal."
+      "reason": "At just \u00a35.8m he posts a strong 6.28 predicted points and carries the highest elite template score in the squad at 0.70 \u2014 meaning 70% of top managers own him \u2014 making him excellent value in a 5-man defence."
     },
     {
-      "player": "De Cuyper",
-      "reason": "At just \u00a34.8m he puts up 5.45 predicted points and carries an elite_template_score of 0.79, making him exceptional value as an enabler of premium picks elsewhere; the model and elite managers alike clearly rate him."
+      "player": "Tarkowski",
+      "reason": "The model's top-scoring defender at 6.76 predicted points for only \u00a36.1m, and nearly half of elite managers (0.46 elite template score) also hold him, suggesting broad confidence in his clean-sheet and set-piece potential."
     },
     {
-      "player": "Verbruggen",
-      "reason": "The Brighton goalkeeper leads all keepers in projected output at 5.6 predicted points for only \u00a34.5m \u2014 a pure model call that also aligns with a 0.38 elite_template_score, representing a cost-efficient anchor in goal."
+      "player": "Gibbs-White",
+      "reason": "At \u00a38.0m he delivers a solid 6.38 predicted points and an elite template score of 0.42, making him one of the more consensus midfield picks in this squad despite the model-only approach."
     },
     {
-      "player": "Rogers",
-      "reason": "At \u00a37.7m she projects 6.38 predicted points \u2014 essentially matching the captain pick in raw output \u2014 and her elite_template_score of 0.73 confirms she is a near-consensus pick among top managers, giving this selection both model and real-world credibility."
+      "player": "B.Fernandes",
+      "reason": "Priced at \u00a312.0m he matches Saka's 7.68 predicted points, justifying his premium tag as vice-captain and the squad's most expensive asset \u2014 the model sees him as a genuine ceiling pick this gameweek."
     }
   ]
 }

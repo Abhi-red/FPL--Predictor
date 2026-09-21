@@ -1,17 +1,17 @@
-# Suggested squad - 2026-27 GW4
+# Suggested squad - 2026-27 GW5
 
-A 4-5-1 squad costing £99.1m and projecting 69.03 points, built entirely on the points model with zero influence from elite ownership — the elite_weight is 0.0 due to no tuning config, so elite_template_scores played no role in selection whatsoever. The shape leans heavily on midfield, with three Arsenal assets in defence and a budget-conscious single striker. The bench is thin on quality, with Watkins (2.68 predicted points) and Kostoulas (3.99) as the only realistic cover, suggesting the model is very confident in the starting XI.
+The squad runs a 5-4-1 shape, investing heavily in Arsenal and Nott'm Forest assets to free up budget across the backline, where five defenders are used to pack in value picks. Elite ownership had zero influence on selection — the elite weight is explicitly set to 0.0 with no tuning config — so every decision here is driven purely by the points model and any injury/news flags.
 
-**Formation** 4-5-1 | **Cost** GBP99.1m | **Projected** 69.03 pts
+**Formation** 5-4-1 | **Cost** GBP98.0m | **Projected** 74.73 pts
 
-**Captain:** B.Fernandes | **Vice:** Rogers  
-Bruno Fernandes captains with the highest predicted points in the XI at 6.52, making him the model's top return candidate despite a relatively modest elite_template_score of 0.30. Rogers (6.38 predicted points, elite_template_score 0.73) is a logical vice — she offers nearly the same ceiling and is widely held among top managers.
+**Captain:** Saka | **Vice:** B.Fernandes  
+Saka and B.Fernandes share the joint-highest predicted points in the squad at 7.68 each. Saka gets the armband, likely for Arsenal's home advantage and his consistent attacking returns, while Fernandes is a credible vice at the same ceiling given his set-piece and creative involvement at Man Utd.
 
 _Elite weight: 0.0 (no-config). Elite-template weight 0.0 (no tuning config yet); squad is pure model + news._
 
 ## Standout picks
 
-- **Calafiori** - The model's top-scoring defender at 6.2 predicted points and backed by an elite_template_score of 0.84 — even though elite ownership didn't drive selection, 84% of elite managers also hold him, suggesting strong consensus on his attacking output for Arsenal.
-- **De Cuyper** - At just £4.8m he puts up 5.45 predicted points and carries an elite_template_score of 0.79, making him exceptional value as an enabler of premium picks elsewhere; the model and elite managers alike clearly rate him.
-- **Verbruggen** - The Brighton goalkeeper leads all keepers in projected output at 5.6 predicted points for only £4.5m — a pure model call that also aligns with a 0.38 elite_template_score, representing a cost-efficient anchor in goal.
-- **Rogers** - At £7.7m she projects 6.38 predicted points — essentially matching the captain pick in raw output — and her elite_template_score of 0.73 confirms she is a near-consensus pick among top managers, giving this selection both model and real-world credibility.
+- **Calafiori** - At just £5.8m he posts a strong 6.28 predicted points and carries the highest elite template score in the squad at 0.70 — meaning 70% of top managers own him — making him excellent value in a 5-man defence.
+- **Tarkowski** - The model's top-scoring defender at 6.76 predicted points for only £6.1m, and nearly half of elite managers (0.46 elite template score) also hold him, suggesting broad confidence in his clean-sheet and set-piece potential.
+- **Gibbs-White** - At £8.0m he delivers a solid 6.38 predicted points and an elite template score of 0.42, making him one of the more consensus midfield picks in this squad despite the model-only approach.
+- **B.Fernandes** - Priced at £12.0m he matches Saka's 7.68 predicted points, justifying his premium tag as vice-captain and the squad's most expensive asset — the model sees him as a genuine ceiling pick this gameweek.
