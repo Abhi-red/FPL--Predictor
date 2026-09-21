@@ -1,5 +1,7 @@
 # FPL Weekly Predictor
 
+**Live site:** https://abhi-red.github.io/FPL--Predictor/
+
 An end-to-end system that predicts the best Fantasy Premier League (FPL) team every gameweek, combining statistical modeling with retrieval-augmented reasoning over injury news and team updates — and explains every recommendation in plain English.
 
 ## What this is
@@ -145,16 +147,19 @@ server (`python -m http.server -d site`).
 
 ### Deploying
 
-The project isn't a git repo yet. To get the weekly automation and the public
-site running:
+Already wired up and running on this repo:
 
-1. `git init`, commit, push to a GitHub repo.
-2. Add `ANTHROPIC_API_KEY` as an Actions secret.
-3. Enable GitHub Pages (source: GitHub Actions).
+1. `.github/workflows/weekly-pipeline.yml` runs the pipeline every Monday
+   morning UTC (and on demand via `workflow_dispatch`), caching `data/`
+   between runs and committing fresh `site/data/*.json` with the
+   `ANTHROPIC_API_KEY` Actions secret.
+2. `.github/workflows/pages.yml` publishes `site/` to GitHub Pages on every
+   change — either a direct push touching `site/**`, or the weekly pipeline's
+   commit (via a `workflow_run` trigger, since commits made with the default
+   `GITHUB_TOKEN` don't fire `on: push` themselves).
 
-`.github/workflows/weekly-pipeline.yml` then runs the pipeline every Monday
-morning UTC (and on demand), caching `data/` between runs and committing fresh
-`site/data/*.json`; `pages.yml` publishes the site on each change.
+To stand this up in a fork: enable GitHub Pages (source: GitHub Actions) and
+add `ANTHROPIC_API_KEY` as a repo secret.
 
 See `DECISIONS.md` for the non-obvious engineering choices.
 

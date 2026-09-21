@@ -1,13 +1,19 @@
 name: pages
 
-# Publishes the static site in site/ to GitHub Pages whenever it changes on main
-# (the weekly pipeline commits fresh site/data/*.json, which triggers this).
+# Publishes the static site in site/ to GitHub Pages whenever it changes on main.
+# Direct pushes to site/** trigger this normally. The weekly pipeline's commit
+# is made with the default GITHUB_TOKEN, though, and GitHub does not let
+# GITHUB_TOKEN-authored pushes fire other workflows' `on: push` (it's an
+# infinite-loop guard) - so we also listen for weekly-pipeline finishing.
 on:
   push:
     branches: [main]
     paths:
       - "site/**"
       - ".github/workflows/pages.yml"
+  workflow_run:
+    workflows: ["weekly-pipeline"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -21,6 +27,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

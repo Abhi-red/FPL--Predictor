@@ -138,7 +138,7 @@ def _fallback(context: dict) -> dict:
     )[:3]
     flagged = [p for p in context["starting_xi"] + context["bench"] if "news_flag" in p]
     summary = (
-        f"A {context['formation']} squad costing GBP{context['total_cost']}m, "
+        f"A {context['formation']} squad costing £{context['total_cost']}m, "
         f"projected {context['projected_points']} points for GW{context['gameweek']}. "
         f"Built by maximising model-predicted points under FPL's budget, "
         f"formation and 3-per-club rules."
@@ -157,7 +157,7 @@ def _fallback(context: dict) -> dict:
             {
                 "player": p["name"],
                 "reason": (
-                    f"{p['club']} {p['position']} at GBP{p['price']}m, "
+                    f"{p['club']} {p['position']} at £{p['price']}m, "
                     f"projected {p['predicted_points']} pts, "
                     f"elite ownership {round(p.get('elite_template_score', 0.0) * 100)}%"
                     + (f"; note: {p['news_flag']}" if "news_flag" in p else "")
@@ -175,7 +175,7 @@ def render_markdown(context: dict, body: dict) -> str:
         body.get("summary", ""),
         "",
         f"**Formation** {context['formation']} | "
-        f"**Cost** GBP{context['total_cost']}m | "
+        f"**Cost** £{context['total_cost']}m | "
         f"**Projected** {context['projected_points']} pts",
         "",
         f"**Captain:** {context['captain']} | **Vice:** {context['vice']}  ",
