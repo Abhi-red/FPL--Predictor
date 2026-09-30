@@ -34,16 +34,15 @@ ordered input list for train/predict.
 
 ## Persistence & CI
 
-**`data/*.db`, `data/models/`, `data/faiss/` are gitignored** (per the brief),
-which conflicts with the README's "commit the DB/FAISS to the repo". Resolution:
+**`data/*.db`, `data/models/`, `data/faiss/` are gitignored**. Instead,
 the static site consumes **only `site/data/*.json`**, which *is* committed by the
 weekly workflow. The DB, models and index are persisted between CI runs via
 `actions/cache`; a cache miss makes the workflow run `backfill_historical.py`
 before the weekly job. This keeps the repo small and the site self-contained.
 
-**Git / GitHub is left to the user.** The folder isn't a git repo yet. The
-weekly workflow and Pages deploy only do anything once the user runs `git init`,
-pushes to a GitHub repo, and adds `ANTHROPIC_API_KEY` as an Actions secret.
+**GitHub deployment is active.** The weekly workflow commits only site output;
+the Pages workflow publishes `site/`. `ANTHROPIC_API_KEY` is optional because
+the explanation stage has a deterministic fallback.
 
 ## Modelling
 
