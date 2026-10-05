@@ -1,29 +1,29 @@
 {
   "season": "2026-27",
   "gameweek": 6,
-  "generated_at": "2026-09-28T14:31:22.721719+00:00",
+  "generated_at": "2026-10-05T15:18:50.161390+00:00",
   "source": "claude-sonnet-4-6",
   "elite_weight": 0.0,
   "elite_weight_status": "no-config",
   "elite_note": "Elite-template weight 0.0 (no tuning config yet); squad is pure model + news.",
-  "summary": "This is a 5-4-1 squad built entirely on the points model with no elite-ownership influence \u2014 the elite_weight is 0.0 due to no tuning config being in place, so elite_template_scores played zero role in selection. The squad leans heavily on Arsenal assets (Gabriel, Calafiori, Saka) and pairs two cheap Forest players (N.Williams, Gibbs-White) to free up budget for premium midfielders like Bruno Fernandes and Palmer. The bench is effectively dead weight, suggesting the budget was spent almost entirely on the starting XI.",
-  "captain_rationale": "Saka is the top predicted scorer in the squad at 7.26 points and earns the captaincy, with his doubled score driving the bulk of the projected total. Gabriel is a logical vice at 7.1 predicted points \u2014 he is the second-highest scorer and offers Arsenal's defensive upside as a set-piece threat.",
+  "summary": "A 4-5-1 built around a heavy midfield investment, with Arsenal players featuring prominently across defence and attack. The squad was selected purely on the points model \u2014 elite ownership played no role whatsoever (weight set to 0.0 with no tuning config in place), so players like Calafiori (elite_template_score 0.70) and Gro\u00df (0.65) made the cut on predicted points merit rather than because elite managers hold them.",
+  "captain_rationale": "Saka is the captain with the squad's highest predicted points (6.93), offering Arsenal's attacking upside at a reasonable \u00a39.5. Tarkowski is a somewhat cautious vice pick \u2014 his 6.89 predicted points reflect Everton's defensive solidity, though it is unusual to see a defender as backup armband option.",
   "standout_picks": [
     {
-      "player": "Saka",
-      "reason": "The highest predicted points in the squad at 7.26, and chosen as captain despite a relatively low elite_template_score of 0.16 \u2014 this is a pure model call, not a crowd-following one."
-    },
-    {
       "player": "Tarkowski",
-      "reason": "Predicted 6.75 points at just \u00a36.1m, making him the best value defender in the XI. His elite_template_score of 0.46 is the highest among outfield starters, suggesting model and elite managers are aligned on his appeal even though elite weight was not formally applied."
+      "reason": "At just \u00a36.2, Tarkowski delivers a projected 6.89 points \u2014 the second-highest in the squad and nearly matching the captain's ceiling. Nearly half of elite managers (0.46) hold him, suggesting broad recognition of his value even without elite weighting influencing this squad."
     },
     {
       "player": "Calafiori",
-      "reason": "At \u00a35.8m he is the cheapest Arsenal asset in the squad and carries the highest elite_template_score of any player at 0.70, meaning seven in ten elite managers own him \u2014 the model independently arrived at him regardless, adding confidence to the pick."
+      "reason": "Priced at a budget-friendly \u00a35.8, Calafiori projects 5.04 points and carries the squad's highest elite_template_score at 0.70 \u2014 meaning 70% of elite managers own him. The model selected him on raw numbers alone, which happens to align strongly with elite consensus."
     },
     {
-      "player": "B.Fernandes",
-      "reason": "At \u00a311.9m he is the most expensive player in the squad, but his predicted 6.02 points justifies the outlay as a premium midfield option. His elite_template_score of 0.24 is modest, so this is primarily a model-driven selection rather than a template play."
+      "player": "Gro\u00df",
+      "reason": "At \u00a35.9, Gro\u00df offers excellent value with 5.56 predicted points and an elite_template_score of 0.65. Like Calafiori, he was picked purely by the model but is heavily backed by top managers, making him one of the squad's most convincing selections."
+    },
+    {
+      "player": "Schuster",
+      "reason": "A differential pick at the minimum price band (\u00a34.5) with a predicted 4.96 points and zero elite ownership \u2014 the model is backing him as a budget enabler who can still contribute meaningfully, freeing up funds spent elsewhere on B.Fernandes (\u00a311.9)."
     }
   ]
 }

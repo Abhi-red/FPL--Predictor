@@ -1,17 +1,17 @@
 # Suggested squad - 2026-27 GW6
 
-This is a 5-4-1 squad built entirely on the points model with no elite-ownership influence — the elite_weight is 0.0 due to no tuning config being in place, so elite_template_scores played zero role in selection. The squad leans heavily on Arsenal assets (Gabriel, Calafiori, Saka) and pairs two cheap Forest players (N.Williams, Gibbs-White) to free up budget for premium midfielders like Bruno Fernandes and Palmer. The bench is effectively dead weight, suggesting the budget was spent almost entirely on the starting XI.
+A 4-5-1 built around a heavy midfield investment, with Arsenal players featuring prominently across defence and attack. The squad was selected purely on the points model — elite ownership played no role whatsoever (weight set to 0.0 with no tuning config in place), so players like Calafiori (elite_template_score 0.70) and Groß (0.65) made the cut on predicted points merit rather than because elite managers hold them.
 
-**Formation** 5-4-1 | **Cost** £99.8m | **Projected** 70.59 pts
+**Formation** 4-5-1 | **Cost** £99.8m | **Projected** 67.56 pts
 
-**Captain:** Saka | **Vice:** Gabriel  
-Saka is the top predicted scorer in the squad at 7.26 points and earns the captaincy, with his doubled score driving the bulk of the projected total. Gabriel is a logical vice at 7.1 predicted points — he is the second-highest scorer and offers Arsenal's defensive upside as a set-piece threat.
+**Captain:** Saka | **Vice:** Tarkowski  
+Saka is the captain with the squad's highest predicted points (6.93), offering Arsenal's attacking upside at a reasonable £9.5. Tarkowski is a somewhat cautious vice pick — his 6.89 predicted points reflect Everton's defensive solidity, though it is unusual to see a defender as backup armband option.
 
 _Elite weight: 0.0 (no-config). Elite-template weight 0.0 (no tuning config yet); squad is pure model + news._
 
 ## Standout picks
 
-- **Saka** - The highest predicted points in the squad at 7.26, and chosen as captain despite a relatively low elite_template_score of 0.16 — this is a pure model call, not a crowd-following one.
-- **Tarkowski** - Predicted 6.75 points at just £6.1m, making him the best value defender in the XI. His elite_template_score of 0.46 is the highest among outfield starters, suggesting model and elite managers are aligned on his appeal even though elite weight was not formally applied.
-- **Calafiori** - At £5.8m he is the cheapest Arsenal asset in the squad and carries the highest elite_template_score of any player at 0.70, meaning seven in ten elite managers own him — the model independently arrived at him regardless, adding confidence to the pick.
-- **B.Fernandes** - At £11.9m he is the most expensive player in the squad, but his predicted 6.02 points justifies the outlay as a premium midfield option. His elite_template_score of 0.24 is modest, so this is primarily a model-driven selection rather than a template play.
+- **Tarkowski** - At just £6.2, Tarkowski delivers a projected 6.89 points — the second-highest in the squad and nearly matching the captain's ceiling. Nearly half of elite managers (0.46) hold him, suggesting broad recognition of his value even without elite weighting influencing this squad.
+- **Calafiori** - Priced at a budget-friendly £5.8, Calafiori projects 5.04 points and carries the squad's highest elite_template_score at 0.70 — meaning 70% of elite managers own him. The model selected him on raw numbers alone, which happens to align strongly with elite consensus.
+- **Groß** - At £5.9, Groß offers excellent value with 5.56 predicted points and an elite_template_score of 0.65. Like Calafiori, he was picked purely by the model but is heavily backed by top managers, making him one of the squad's most convincing selections.
+- **Schuster** - A differential pick at the minimum price band (£4.5) with a predicted 4.96 points and zero elite ownership — the model is backing him as a budget enabler who can still contribute meaningfully, freeing up funds spent elsewhere on B.Fernandes (£11.9).
