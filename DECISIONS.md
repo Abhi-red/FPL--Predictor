@@ -61,7 +61,7 @@ imputation.
 **No leakage:** every rolling/trend feature is `.shift(1)` before `.rolling(...)`,
 so a row never sees its own or any later result. The walk-forward backtest
 (`train.py --backtest`) trains only on `(season, gameweek)` tuples strictly
-before the scored one; it refits every `--stride` gameweeks (default 3) rather
+before the scored one; it refits every `--stride` gameweeks (default 5) rather
 than every gameweek purely for runtime.
 Saved models are retrained if their manifest's feature list differs from the
 current feature list, even if they are otherwise recent.
@@ -90,7 +90,8 @@ from every surviving `news_chunks` row each run after chunks older than
 `NEWS_MAX_AGE_DAYS` (21) are deleted.
 
 **Adjustment is bounded and signal-gated.** A chunk only adjusts a prediction if
-an identifying player name and an availability phrase share a clause: `OUT` → ×0.70,
+an identifying player name and an availability phrase share a clause, with
+negated or differently attributed claims ignored: `OUT` → ×0.70,
 `DOUBT` → ×0.85, `BOOST` → ×1.15. The factor is clamped to
 `[1 − ADJUSTMENT_CAP, 1 + ADJUSTMENT_CAP]` = `[0.70, 1.30]` — news can nudge a
 prediction, never replace it. Factor + reason + source URL are stored on
@@ -150,11 +151,21 @@ paths (works on a GitHub Pages project site and on Vercel). Placeholder JSON in
 
 <!-- ELITE_WEIGHT_TUNING:START -->
 
-_Last run 2026-09-01T18:43:39.865613+00:00 — `python src/optimize/tune_elite_weight.py`._
+_Last run 2026-10-09T06:19:03.769357+00:00 — `python src/optimize/tune_elite_weight.py`._
 
-**Chosen `ELITE_WEIGHT` = 0.0** (status: `deferred`).
+**Chosen `ELITE_WEIGHT` = 0.0** (status: `tuned`).
 
-only 2 gameweek(s) have both elite ownership data and realized results; need 5. Deferring to pure stats until enough elite data accumulates.
+no non-zero weight matched the 0.0 control (best margin +0.000); kept pure stats
 
+Swept 5 walk-forward gameweeks (2026-27 GW1 - 2026-27 GW5). Realized points = XI actual total_points + captain doubled, from `player_gameweek_stats`.
+
+| weight | avg realized pts / GW | total realized | Δ vs 0.0 |
+|---|---|---|---|
+| 0.0 | 59.000 | 295.0 | +0.000 |
+| 0.05 | 58.000 | 290.0 | -1.000 |
+| 0.1 | 58.000 | 290.0 | -1.000 |
+| 0.15 | 58.400 | 292.0 | -0.600 |
+| 0.2 | 55.400 | 277.0 | -3.600 |
+| 0.3 | 56.800 | 284.0 | -2.200 |
 
 <!-- ELITE_WEIGHT_TUNING:END -->

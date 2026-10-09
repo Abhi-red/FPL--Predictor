@@ -25,6 +25,15 @@ test("overview preserves squad, totals and captain and exposes freshness", async
   page,
 }) => {
   await open(page);
+  await page.route("**/data/meta.json", (route) =>
+    route.fulfill({
+      json: {
+        ...JSON.parse(fs.readFileSync(path.join(root, "data/meta.json"))),
+        generated_at: new Date(Date.now() - 9 * 86400000).toISOString(),
+      },
+    }),
+  );
+  await page.reload();
   await expect(page.getByRole("tab", { name: "Overview" })).toHaveAttribute(
     "aria-selected",
     "true",

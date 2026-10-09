@@ -1,29 +1,25 @@
 {
   "season": "2026-27",
   "gameweek": 6,
-  "generated_at": "2026-10-05T15:18:50.161390+00:00",
-  "source": "claude-sonnet-4-6",
+  "generated_at": "2026-10-09T07:17:24.559051+00:00",
+  "source": "template (api-error)",
   "elite_weight": 0.0,
-  "elite_weight_status": "no-config",
-  "elite_note": "Elite-template weight 0.0 (no tuning config yet); squad is pure model + news.",
-  "summary": "A 4-5-1 built around a heavy midfield investment, with Arsenal players featuring prominently across defence and attack. The squad was selected purely on the points model \u2014 elite ownership played no role whatsoever (weight set to 0.0 with no tuning config in place), so players like Calafiori (elite_template_score 0.70) and Gro\u00df (0.65) made the cut on predicted points merit rather than because elite managers hold them.",
-  "captain_rationale": "Saka is the captain with the squad's highest predicted points (6.93), offering Arsenal's attacking upside at a reasonable \u00a39.5. Tarkowski is a somewhat cautious vice pick \u2014 his 6.89 predicted points reflect Everton's defensive solidity, though it is unusual to see a defender as backup armband option.",
+  "elite_weight_status": "tuned",
+  "elite_note": "Elite tuning ran over 5 gameweeks and found no weight beat pure stats, so elite ownership was NOT used (weight 0.0).",
+  "summary": "A 4-5-1 squad costing \u00a399.6m, projected 70.1 points for GW6. Built by maximising model-predicted points under FPL's budget, formation and 3-per-club rules.",
+  "captain_rationale": "B.Fernandes is the highest projected starter, with Gabriel as vice.",
   "standout_picks": [
     {
-      "player": "Tarkowski",
-      "reason": "At just \u00a36.2, Tarkowski delivers a projected 6.89 points \u2014 the second-highest in the squad and nearly matching the captain's ceiling. Nearly half of elite managers (0.46) hold him, suggesting broad recognition of his value even without elite weighting influencing this squad."
+      "player": "B.Fernandes",
+      "reason": "Man Utd MID at \u00a311.9m, projected 6.81 pts, elite ownership 24%"
     },
     {
-      "player": "Calafiori",
-      "reason": "Priced at a budget-friendly \u00a35.8, Calafiori projects 5.04 points and carries the squad's highest elite_template_score at 0.70 \u2014 meaning 70% of elite managers own him. The model selected him on raw numbers alone, which happens to align strongly with elite consensus."
+      "player": "Gabriel",
+      "reason": "Arsenal DEF at \u00a38.0m, projected 6.4 pts, elite ownership 10%"
     },
     {
       "player": "Gro\u00df",
-      "reason": "At \u00a35.9, Gro\u00df offers excellent value with 5.56 predicted points and an elite_template_score of 0.65. Like Calafiori, he was picked purely by the model but is heavily backed by top managers, making him one of the squad's most convincing selections."
-    },
-    {
-      "player": "Schuster",
-      "reason": "A differential pick at the minimum price band (\u00a34.5) with a predicted 4.96 points and zero elite ownership \u2014 the model is backing him as a budget enabler who can still contribute meaningfully, freeing up funds spent elsewhere on B.Fernandes (\u00a311.9)."
+      "reason": "Brighton MID at \u00a35.9m, projected 6.02 pts, elite ownership 66%"
     }
   ]
 }
