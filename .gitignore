@@ -24,3 +24,8 @@ data/*.json
 data/models/
 data/faiss/
 *.faiss
+
+# Dashboard verification
+node_modules/
+test-results/
+.dashboard-test-deps/
