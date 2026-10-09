@@ -1,82 +1,354 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Predicted Fantasy Premier League squad, rebuilt weekly from an XGBoost model, RAG news adjustment, and an ILP optimizer, with a plain-English explanation for every pick." />
-  <title>FPL Weekly Predictor</title>
-  <link rel="stylesheet" href="./css/styles.css?v=3" />
-</head>
-<body>
-  <header class="topbar">
-    <div class="brand">
-      <span class="mark">FPL</span>
-      <span class="brand-text">Weekly Predictor</span>
-    </div>
-    <div class="gw-badge" id="gwBadge">GW –</div>
-  </header>
-
-  <nav class="tabs" role="tablist">
-    <button class="tab is-active" data-view="squad" role="tab">Squad</button>
-    <button class="tab" data-view="players" role="tab">Players</button>
-    <button class="tab" data-view="explain" role="tab">Why</button>
-  </nav>
-
-  <main>
-    <section id="view-squad" class="view is-active">
-      <div class="squad-summary" id="squadSummary"></div>
-      <div class="pitch" id="pitch"></div>
-      <h3 class="bench-label">Bench</h3>
-      <div class="bench" id="bench"></div>
-    </section>
-
-    <section id="view-players" class="view">
-      <div class="controls">
-        <input type="search" id="search" placeholder="Search player or club…" />
-        <div class="pos-filter" id="posFilter">
-          <button class="chip is-active" data-pos="ALL">All</button>
-          <button class="chip" data-pos="GK">GK</button>
-          <button class="chip" data-pos="DEF">DEF</button>
-          <button class="chip" data-pos="MID">MID</button>
-          <button class="chip" data-pos="FWD">FWD</button>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="Your next gameweek, considered. Explore a predicted FPL squad, captain advice, and the numbers behind every pick."
+    />
+    <title>FPL Weekly Predictor</title>
+    <link rel="stylesheet" href="./css/styles.css?v=4" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="FPL Weekly Predictor"
+        ><span class="brand-mark" aria-hidden="true">fpl<span>.</span></span
+        ><span class="brand-name">Weekly Predictor</span></a
+      >
+      <span class="season-label" id="seasonLabel">Weekly predictions</span>
+    </header>
+    <main id="main" tabindex="-1">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow" id="gameweekLabel">The next gameweek</p>
+          <h1>
+            Your next move,<br class="mobile-break" />
+            considered.
+          </h1>
+          <p class="lede">A clearer view of who to pick. And why.</p>
+        </div>
+        <div class="update-info">
+          <span class="update-dot" aria-hidden="true"></span>
+          <div>
+            <span id="generatedAt">Checking update time…</span
+            ><span id="freshness" role="status"></span>
+          </div>
         </div>
       </div>
-      <div class="table-wrap">
-        <table id="playersTable">
-          <thead>
-            <tr>
-              <th data-sort="web_name">Player</th>
-              <th data-sort="team">Club</th>
-              <th data-sort="position">Pos</th>
-              <th data-sort="opponent_team">Opp</th>
-              <th data-sort="price" class="num">£</th>
-              <th data-sort="raw_points" class="num">Raw</th>
-              <th data-sort="adjusted_points" class="num">Adj</th>
-              <th data-sort="news_flag">News</th>
-            </tr>
-          </thead>
-          <tbody id="playersBody"></tbody>
-        </table>
+      <nav class="navigation" aria-label="Dashboard views">
+        <div class="tabs" role="tablist" aria-label="Dashboard">
+          <button
+            id="tab-overview"
+            class="tab is-active"
+            data-view="overview"
+            role="tab"
+            aria-selected="true"
+            aria-controls="view-overview"
+          >
+            Overview</button
+          ><button
+            id="tab-players"
+            class="tab"
+            data-view="players"
+            role="tab"
+            aria-selected="false"
+            aria-controls="view-players"
+            tabindex="-1"
+          >
+            Players</button
+          ><button
+            id="tab-insights"
+            class="tab"
+            data-view="insights"
+            role="tab"
+            aria-selected="false"
+            aria-controls="view-insights"
+            tabindex="-1"
+          >
+            Insights
+          </button>
+        </div>
+        <span class="nav-note">Built for the game ahead</span>
+      </nav>
+      <section
+        id="view-overview"
+        class="view"
+        role="tabpanel"
+        aria-labelledby="tab-overview"
+      >
+        <div id="squadSummary" class="summary-strip" aria-live="polite">
+          <div class="loading">Preparing your gameweek…</div>
+        </div>
+        <div class="overview-grid">
+          <section class="squad-panel panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">The suggested squad</p>
+                <h2>Starting eleven</h2>
+              </div>
+              <span class="subtle-tag" id="formationTag">—</span>
+            </div>
+            <div
+              class="pitch"
+              id="pitch"
+              aria-label="Suggested starting eleven"
+            >
+              <p class="loading">Loading squad…</p>
+            </div>
+            <div class="bench-heading">
+              <h3>On the bench</h3>
+              <span class="muted">In suggested order</span>
+            </div>
+            <div class="bench" id="bench"></div>
+            <p class="pitch-note">
+              Select any player to explore their prediction.
+            </p>
+          </section>
+          <aside class="overview-aside" aria-label="Gameweek advice">
+            <section class="panel captain-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">The armband</p>
+                  <h2>Captain’s choice</h2>
+                </div>
+                <span class="captain-symbol" aria-hidden="true">C</span>
+              </div>
+              <div id="captainAdvice">
+                <p class="loading">Loading captain advice…</p>
+              </div>
+            </section>
+            <section class="panel picks-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Worth a closer look</p>
+                  <h2>Standout picks</h2>
+                </div>
+              </div>
+              <div id="standoutPicks">
+                <p class="loading">Loading picks…</p>
+              </div>
+              <button class="text-button" id="readInsights">
+                Read the gameweek insights <span aria-hidden="true">↗</span>
+              </button>
+            </section>
+          </aside>
+        </div>
+      </section>
+      <section
+        id="view-players"
+        class="view"
+        role="tabpanel"
+        aria-labelledby="tab-players"
+        hidden
+      >
+        <div class="section-intro">
+          <div>
+            <h2>Find your next pick.</h2>
+            <p class="muted">Explore the numbers behind every player.</p>
+          </div>
+          <span id="playerCount" class="subtle-tag" role="status"></span>
+        </div>
+        <section class="panel players-panel" aria-label="Player research">
+          <div class="controls">
+            <div class="search-field">
+              <label for="search">Search players</label
+              ><input
+                type="search"
+                id="search"
+                placeholder="Player or club name"
+                autocomplete="off"
+              />
+            </div>
+            <div class="club-field">
+              <label for="clubFilter">Club</label
+              ><select id="clubFilter">
+                <option value="ALL">All clubs</option>
+              </select>
+            </div>
+            <div class="position-field">
+              <span id="positionLabel" class="control-label">Position</span>
+              <div
+                class="pos-filter"
+                id="posFilter"
+                role="group"
+                aria-labelledby="positionLabel"
+              >
+                <button
+                  class="chip is-active"
+                  data-pos="ALL"
+                  aria-pressed="true"
+                >
+                  All</button
+                ><button class="chip" data-pos="GK" aria-pressed="false">
+                  GK</button
+                ><button class="chip" data-pos="DEF" aria-pressed="false">
+                  DEF</button
+                ><button class="chip" data-pos="MID" aria-pressed="false">
+                  MID</button
+                ><button class="chip" data-pos="FWD" aria-pressed="false">
+                  FWD
+                </button>
+              </div>
+            </div>
+            <button class="text-button clear-filters" id="clearFilters">
+              Clear filters
+            </button>
+          </div>
+          <div
+            class="table-wrap"
+            tabindex="0"
+            role="region"
+            aria-label="Player predictions table, scroll horizontally for more columns"
+          >
+            <table id="playersTable">
+              <caption class="sr-only">
+                Player predictions for the displayed gameweek
+              </caption>
+              <thead>
+                <tr>
+                  <th data-sort="web_name" scope="col">
+                    <button aria-label="Sort by Player">
+                      Player <span class="sort-arrow"></span>
+                    </button>
+                  </th>
+                  <th data-sort="team" scope="col">
+                    <button aria-label="Sort by Club">
+                      Club <span class="sort-arrow"></span>
+                    </button>
+                  </th>
+                  <th data-sort="position" scope="col">
+                    <button aria-label="Sort by Position">
+                      Position <span class="sort-arrow"></span>
+                    </button>
+                  </th>
+                  <th data-sort="opponent_team" scope="col">
+                    <button aria-label="Sort by Opponent">
+                      Opponent <span class="sort-arrow"></span>
+                    </button>
+                  </th>
+                  <th data-sort="price" class="num" scope="col">
+                    <button aria-label="Sort by Price">
+                      Price <span class="sort-arrow"></span>
+                    </button>
+                  </th>
+                  <th data-sort="raw_points" class="num" scope="col">
+                    <button aria-label="Sort by Model points">
+                      Model points <span class="sort-arrow"></span>
+                    </button>
+                  </th>
+                  <th
+                    data-sort="adjusted_points"
+                    class="num"
+                    scope="col"
+                    aria-sort="descending"
+                  >
+                    <button aria-label="Sort by Predicted points">
+                      Predicted points <span class="sort-arrow">↓</span>
+                    </button>
+                  </th>
+                  <th scope="col">News</th>
+                </tr>
+              </thead>
+              <tbody id="playersBody">
+                <tr>
+                  <td colspan="8" class="empty">Loading players…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-note">
+            Predicted points include available team-news adjustments. Select a
+            player for the full picture.
+          </div>
+        </section>
+      </section>
+      <section
+        id="view-insights"
+        class="view"
+        role="tabpanel"
+        aria-labelledby="tab-insights"
+        hidden
+      >
+        <div class="section-intro">
+          <div>
+            <h2>The thinking behind the team.</h2>
+            <p class="muted">From the numbers to the final eleven.</p>
+          </div>
+        </div>
+        <div id="explanation" class="insights-grid">
+          <p class="loading">Loading insights…</p>
+        </div>
+        <section class="panel methodology">
+          <p class="eyebrow">How it works</p>
+          <h2>Statistics. Context. A balanced squad.</h2>
+          <div class="method-grid">
+            <div>
+              <h3>Predict the points</h3>
+              <p>
+                Position-specific models use past performance, recent form, and
+                fixture information to estimate next-gameweek points.
+              </p>
+            </div>
+            <div>
+              <h3>Consider the news</h3>
+              <p>
+                Available injury and team-news reports can adjust a player’s
+                prediction. Open player details to see the adjustment and its
+                source.
+              </p>
+            </div>
+            <div>
+              <h3>Build the squad</h3>
+              <p>
+                The optimizer selects 15 players and a starting eleven within
+                FPL’s budget, formation, and club limits. Captain points are
+                included in the squad projection.
+              </p>
+            </div>
+          </div>
+          <p class="method-note">
+            Predictions are estimates, not guaranteed results. This dashboard is
+            published weekly from a saved data snapshot.
+          </p>
+        </section>
+      </section>
+    </main>
+    <div
+      class="drawer"
+      id="drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="drawerTitle"
+      hidden
+    >
+      <div class="drawer-panel">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <button
+          class="drawer-close"
+          id="drawerClose"
+          aria-label="Close player details"
+        >
+          ×
+        </button>
+        <div id="drawerBody"></div>
       </div>
-    </section>
-
-    <section id="view-explain" class="view">
-      <article id="explanation" class="prose"></article>
-    </section>
-  </main>
-
-  <div class="drawer" id="drawer" hidden>
-    <div class="drawer-panel">
-      <button class="drawer-close" id="drawerClose" aria-label="Close">×</button>
-      <div id="drawerBody"></div>
     </div>
-  </div>
-
-  <footer class="foot">
-    <span id="generatedAt"></span>
-    <span>Model + RAG + ILP · rebuilt weekly · <a href="https://github.com/vaastav/Fantasy-Premier-League">historical data</a> · <a href="https://github.com/Abhi-red/FPL--Predictor">source on GitHub</a></span>
-  </footer>
-
-  <script src="./js/app.js?v=3"></script>
-</body>
+    <footer class="foot">
+      <div>
+        <span class="footer-brand">fpl.</span
+        ><span>A little more clarity for your gameweek.</span>
+      </div>
+      <div>
+        <a href="https://github.com/vaastav/Fantasy-Premier-League"
+          >Historical data</a
+        ><a href="https://github.com/Abhi-red/FPL--Predictor"
+          >View on GitHub ↗</a
+        >
+      </div>
+    </footer>
+    <script src="./js/app.js?v=4"></script>
+  </body>
 </html>

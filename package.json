@@ -1,0 +1,10 @@
+{
+  "name": "fpl-weekly-predictor-dashboard",
+  "private": true,
+  "scripts": {
+    "test:dashboard": "playwright test"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}
