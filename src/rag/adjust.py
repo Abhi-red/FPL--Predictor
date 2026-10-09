@@ -1,8 +1,8 @@
 """Nudge raw predictions using retrieved news - only on a clear, specific signal.
 
 For every player with a raw prediction for the upcoming gameweek we retrieve
-recent news. A chunk only counts if it mentions the player's surname AND a
-categorised keyword:
+recent news. A chunk only counts if an identifying name and a bounded
+availability phrase occur in the same sentence or clause:
 
   OUT   (ruled out / suspended / surgery / ...)  -> x(1 - ADJUSTMENT_CAP)
   DOUBT (knock / late test / rotation risk / ...) -> x0.85
@@ -18,6 +18,7 @@ Run (after predict.py and embed.py):
 """
 
 import sys
+import re
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -26,12 +27,12 @@ from constants import ADJUSTMENT_CAP, SEASON  # noqa: E402
 from db import get_connection  # noqa: E402
 
 OUT_TERMS = (
-    "ruled out", "sidelined", "will miss", "out for", "out of the", "suspended",
-    "suspension", "ban ", "banned", "surgery", "long-term", "long term",
-    "not in the squad", "won't play", "will not play", "months out", "acl",
+    "ruled out", "sidelined", "will miss", "out for", "suspended",
+    "banned", "surgery", "long-term injury", "long term injury",
+    "not in the squad", "won't play", "will not play", "months out", "acl injury", "acl tear",
 )
 DOUBT_TERMS = (
-    "doubt", "knock", "assessed", "late test", "late fitness", "rotation risk",
+    "doubt", "knock", "late test", "late fitness", "rotation risk",
     "may be rested", "could be rested", "75%", "50%", "minor", "slight",
     "hamstring tightness", "carrying a", "fitness test",
 )
@@ -56,24 +57,33 @@ UPDATE predictions
 """
 
 
-def _surname(second_name: str, web_name: str) -> str:
-    for candidate in (second_name, web_name):
-        parts = [p for p in (candidate or "").replace(".", " ").split() if len(p) >= 4]
-        if parts:
-            return parts[-1].lower()
-    return (web_name or "").lower()
+def _player_names(first_name: str, second_name: str, web_name: str) -> list[str]:
+    """Use identifying names; a shared surname alone is not enough evidence."""
+    first = (first_name or "").strip()
+    second = (second_name or "").strip()
+    names = [f"{first} {second}".strip(), f"{first} {second.split()[-1]}" if second else ""]
+    if len((web_name or "").split()) > 1:
+        names.append(web_name)
+    return [name for name in dict.fromkeys(names) if len(name.split()) > 1]
 
 
-def classify(chunks: list[dict], surname: str) -> tuple[str, str, str] | None:
-    """First (category, matched_phrase, url) whose chunk names the player, else None."""
+def classify(chunks: list[dict], player_names: str | list[str]) -> tuple[str, str, str] | None:
+    """Return a signal only when a named player and claim share a sentence."""
+    names = [player_names] if isinstance(player_names, str) else player_names
+    patterns = [re.compile(r"(?<!\w)" + re.escape(name.lower()) + r"(?!\w)") for name in names]
     for chunk in chunks:
-        body = chunk["text"].lower()
-        if surname and surname not in body:
-            continue
-        for category, terms in CATEGORIES:
-            for term in terms:
-                if term in body:
-                    return category, term.strip(), chunk["url"]
+        for sentence in re.split(r"(?<=[.!?;])\s+|,\s*|\b(?:but|while|and|whereas)\b", chunk["text"].lower()):
+            if not any(pattern.search(sentence) for pattern in patterns):
+                continue
+            for category, terms in CATEGORIES:
+                for term in terms:
+                    for match in re.finditer(r"(?<!\w)" + re.escape(term) + r"(?!\w)", sentence):
+                        before = sentence[max(0, match.start() - 60):match.start()]
+                        if re.search(r"\b(?:no|not|never|without|cannot|can't|isn't|wasn't|hasn't|haven't|won't|wouldn't|couldn't|shouldn't)\b(?:\s+\w+){0,4}\s*$", before):
+                            continue
+                        if term == "out for" and re.search(r"\b(look|watch)\s+$", before):
+                            continue
+                        return category, term, chunk["url"]
     return None
 
 
@@ -82,12 +92,13 @@ def main() -> None:
         rows = conn.execute(
             """
             SELECT pr.player_id, pr.gameweek, pr.raw_points,
-                   p.web_name, p.second_name
+                   p.web_name, p.first_name, p.second_name
             FROM predictions pr
             JOIN players p ON p.player_id = pr.player_id
             WHERE pr.season = ? AND pr.raw_points IS NOT NULL
+              AND pr.gameweek = (SELECT MAX(gameweek) FROM predictions WHERE season = ?)
             """,
-            (SEASON,),
+            (SEASON, SEASON),
         ).fetchall()
 
     try:
@@ -103,13 +114,13 @@ def main() -> None:
         factor, reason, url = 1.0, None, None
 
         if retrieve is not None:
-            surname = _surname(row["second_name"], row["web_name"])
+            names = _player_names(row["first_name"], row["second_name"], row["web_name"])
             try:
                 chunks = retrieve(f"{row['web_name']} {row['second_name'] or ''}".strip())
             except Exception as error:  # noqa: BLE001
                 chunks = []
                 print(f"  retrieve failed for {row['web_name']}: {error}", file=sys.stderr)
-            hit = classify(chunks, surname)
+            hit = classify(chunks, names)
             if hit:
                 category, phrase, url = hit
                 factor = min(CLAMP_HIGH, max(CLAMP_LOW, FACTOR[category]))

@@ -1,0 +1,750 @@
+{
+  "snapshot": {
+    "season": "2026-27",
+    "gameweek": 6,
+    "generated_at": "2026-10-09T07:17:38.223287+00:00",
+    "players": 667,
+    "training_rows": 136402,
+    "feature_count": 35,
+    "missing_season_identities": 0,
+    "news_adjusted_players": 2,
+    "explanation_source": "template (api-error)",
+    "backtest": {
+      "gameweeks": 81,
+      "n": 59473,
+      "mae": 1.0135,
+      "rmse": 1.9829
+    },
+    "checked_at": "2026-10-09T07:19:26.893755+00:00"
+  },
+  "model_manifest": {
+    "trained_at": "2026-10-09T06:15:30.744466+00:00",
+    "feature_columns": [
+      "roll3_total_points",
+      "roll5_total_points",
+      "roll10_total_points",
+      "roll3_minutes_played",
+      "roll5_minutes_played",
+      "roll10_minutes_played",
+      "roll3_goals_scored",
+      "roll5_goals_scored",
+      "roll10_goals_scored",
+      "roll3_assists",
+      "roll5_assists",
+      "roll10_assists",
+      "roll3_bps",
+      "roll5_bps",
+      "roll10_bps",
+      "roll3_bonus",
+      "roll5_bonus",
+      "roll10_bonus",
+      "roll3_expected_goals",
+      "roll5_expected_goals",
+      "roll10_expected_goals",
+      "roll3_expected_assists",
+      "roll5_expected_assists",
+      "roll10_expected_assists",
+      "start_rate_5",
+      "form_ewm",
+      "price",
+      "price_trend_3",
+      "points_per_90_5",
+      "gw_gap",
+      "ownership",
+      "ownership_trend_3",
+      "fdr",
+      "was_home",
+      "fixture_count"
+    ],
+    "rows_per_position": {
+      "GK": 15135,
+      "DEF": 45513,
+      "MID": 59408,
+      "FWD": 16346
+    },
+    "latest_season": "2026-27",
+    "latest_gameweek": 5
+  },
+  "backtest": {
+    "generated_at": "2026-10-09T06:16:58.969632+00:00",
+    "start_season": "2024-25",
+    "stride": 5,
+    "per_position": {
+      "GK": {
+        "n": 6562,
+        "mae": 0.6987,
+        "rmse": 1.5811
+      },
+      "DEF": {
+        "n": 19680,
+        "mae": 1.0882,
+        "rmse": 2.0432
+      },
+      "MID": {
+        "n": 26631,
+        "mae": 1.0001,
+        "rmse": 1.9661
+      },
+      "FWD": {
+        "n": 6600,
+        "mae": 1.1576,
+        "rmse": 2.2141
+      }
+    },
+    "overall": {
+      "n": 59473,
+      "mae": 1.0135,
+      "rmse": 1.9829
+    },
+    "per_gameweek": [
+      {
+        "season": "2024-25",
+        "gameweek": 1,
+        "GK_mae": 1.244,
+        "DEF_mae": 1.264,
+        "MID_mae": 1.369,
+        "FWD_mae": 1.44
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 2,
+        "GK_mae": 0.988,
+        "DEF_mae": 1.164,
+        "MID_mae": 1.253,
+        "FWD_mae": 1.315
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 3,
+        "GK_mae": 0.89,
+        "DEF_mae": 0.797,
+        "MID_mae": 1.126,
+        "FWD_mae": 1.323
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 4,
+        "GK_mae": 1.208,
+        "DEF_mae": 1.122,
+        "MID_mae": 1.013,
+        "FWD_mae": 1.513
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 5,
+        "GK_mae": 0.888,
+        "DEF_mae": 0.996,
+        "MID_mae": 1.112,
+        "FWD_mae": 1.226
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 6,
+        "GK_mae": 0.57,
+        "DEF_mae": 1.073,
+        "MID_mae": 1.125,
+        "FWD_mae": 1.198
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 7,
+        "GK_mae": 0.898,
+        "DEF_mae": 1.145,
+        "MID_mae": 1.02,
+        "FWD_mae": 1.301
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 8,
+        "GK_mae": 0.819,
+        "DEF_mae": 1.139,
+        "MID_mae": 0.989,
+        "FWD_mae": 1.173
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 9,
+        "GK_mae": 0.733,
+        "DEF_mae": 0.85,
+        "MID_mae": 1.008,
+        "FWD_mae": 1.686
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 10,
+        "GK_mae": 0.576,
+        "DEF_mae": 0.965,
+        "MID_mae": 0.901,
+        "FWD_mae": 1.338
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 11,
+        "GK_mae": 0.862,
+        "DEF_mae": 0.961,
+        "MID_mae": 0.983,
+        "FWD_mae": 1.432
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 12,
+        "GK_mae": 0.736,
+        "DEF_mae": 1.054,
+        "MID_mae": 1.231,
+        "FWD_mae": 1.271
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 13,
+        "GK_mae": 0.837,
+        "DEF_mae": 0.965,
+        "MID_mae": 1.061,
+        "FWD_mae": 1.354
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 14,
+        "GK_mae": 0.757,
+        "DEF_mae": 1.253,
+        "MID_mae": 1.113,
+        "FWD_mae": 1.297
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 15,
+        "GK_mae": 0.606,
+        "DEF_mae": 0.857,
+        "MID_mae": 1.091,
+        "FWD_mae": 1.344
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 16,
+        "GK_mae": 0.735,
+        "DEF_mae": 1.049,
+        "MID_mae": 0.991,
+        "FWD_mae": 1.097
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 17,
+        "GK_mae": 0.931,
+        "DEF_mae": 1.257,
+        "MID_mae": 1.068,
+        "FWD_mae": 1.324
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 18,
+        "GK_mae": 0.926,
+        "DEF_mae": 1.129,
+        "MID_mae": 0.841,
+        "FWD_mae": 1.245
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 19,
+        "GK_mae": 0.804,
+        "DEF_mae": 1.031,
+        "MID_mae": 1.009,
+        "FWD_mae": 1.365
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 20,
+        "GK_mae": 0.76,
+        "DEF_mae": 0.923,
+        "MID_mae": 0.941,
+        "FWD_mae": 1.306
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 21,
+        "GK_mae": 0.681,
+        "DEF_mae": 0.91,
+        "MID_mae": 0.961,
+        "FWD_mae": 1.169
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 22,
+        "GK_mae": 0.703,
+        "DEF_mae": 0.969,
+        "MID_mae": 1.214,
+        "FWD_mae": 1.268
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 23,
+        "GK_mae": 0.707,
+        "DEF_mae": 0.93,
+        "MID_mae": 1.008,
+        "FWD_mae": 1.063
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 24,
+        "GK_mae": 0.794,
+        "DEF_mae": 0.988,
+        "MID_mae": 1.03,
+        "FWD_mae": 1.506
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 25,
+        "GK_mae": 0.846,
+        "DEF_mae": 0.897,
+        "MID_mae": 1.083,
+        "FWD_mae": 1.311
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 26,
+        "GK_mae": 0.785,
+        "DEF_mae": 1.057,
+        "MID_mae": 1.069,
+        "FWD_mae": 1.017
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 27,
+        "GK_mae": 0.659,
+        "DEF_mae": 1.02,
+        "MID_mae": 0.864,
+        "FWD_mae": 0.914
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 28,
+        "GK_mae": 0.767,
+        "DEF_mae": 0.853,
+        "MID_mae": 0.835,
+        "FWD_mae": 0.979
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 29,
+        "GK_mae": 0.705,
+        "DEF_mae": 0.837,
+        "MID_mae": 0.853,
+        "FWD_mae": 0.988
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 30,
+        "GK_mae": 0.534,
+        "DEF_mae": 0.879,
+        "MID_mae": 1.002,
+        "FWD_mae": 1.025
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 31,
+        "GK_mae": 0.61,
+        "DEF_mae": 0.882,
+        "MID_mae": 0.936,
+        "FWD_mae": 1.153
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 32,
+        "GK_mae": 0.796,
+        "DEF_mae": 1.107,
+        "MID_mae": 1.011,
+        "FWD_mae": 1.053
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 33,
+        "GK_mae": 0.793,
+        "DEF_mae": 1.113,
+        "MID_mae": 1.034,
+        "FWD_mae": 0.915
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 34,
+        "GK_mae": 0.87,
+        "DEF_mae": 0.912,
+        "MID_mae": 0.782,
+        "FWD_mae": 1.175
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 35,
+        "GK_mae": 0.624,
+        "DEF_mae": 0.816,
+        "MID_mae": 1.027,
+        "FWD_mae": 0.921
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 36,
+        "GK_mae": 0.762,
+        "DEF_mae": 1.074,
+        "MID_mae": 0.848,
+        "FWD_mae": 1.06
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 37,
+        "GK_mae": 0.589,
+        "DEF_mae": 0.979,
+        "MID_mae": 0.896,
+        "FWD_mae": 1.078
+      },
+      {
+        "season": "2024-25",
+        "gameweek": 38,
+        "GK_mae": 0.745,
+        "DEF_mae": 0.91,
+        "MID_mae": 0.931,
+        "FWD_mae": 0.74
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 1,
+        "GK_mae": 1.208,
+        "DEF_mae": 1.553,
+        "MID_mae": 1.164,
+        "FWD_mae": 1.665
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 2,
+        "GK_mae": 0.897,
+        "DEF_mae": 1.272,
+        "MID_mae": 1.2,
+        "FWD_mae": 1.322
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 3,
+        "GK_mae": 0.73,
+        "DEF_mae": 1.32,
+        "MID_mae": 1.058,
+        "FWD_mae": 1.21
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 4,
+        "GK_mae": 0.799,
+        "DEF_mae": 1.311,
+        "MID_mae": 1.084,
+        "FWD_mae": 0.973
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 5,
+        "GK_mae": 0.635,
+        "DEF_mae": 0.995,
+        "MID_mae": 1.058,
+        "FWD_mae": 1.054
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 6,
+        "GK_mae": 0.584,
+        "DEF_mae": 0.982,
+        "MID_mae": 0.962,
+        "FWD_mae": 1.253
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 7,
+        "GK_mae": 0.62,
+        "DEF_mae": 1.1,
+        "MID_mae": 1.011,
+        "FWD_mae": 0.925
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 8,
+        "GK_mae": 0.544,
+        "DEF_mae": 1.248,
+        "MID_mae": 0.895,
+        "FWD_mae": 1.436
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 9,
+        "GK_mae": 0.501,
+        "DEF_mae": 1.125,
+        "MID_mae": 0.968,
+        "FWD_mae": 1.06
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 10,
+        "GK_mae": 0.552,
+        "DEF_mae": 0.992,
+        "MID_mae": 1.029,
+        "FWD_mae": 0.844
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 11,
+        "GK_mae": 0.603,
+        "DEF_mae": 1.146,
+        "MID_mae": 0.992,
+        "FWD_mae": 0.982
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 12,
+        "GK_mae": 0.636,
+        "DEF_mae": 1.069,
+        "MID_mae": 1.028,
+        "FWD_mae": 1.044
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 13,
+        "GK_mae": 0.487,
+        "DEF_mae": 1.018,
+        "MID_mae": 1.041,
+        "FWD_mae": 1.047
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 14,
+        "GK_mae": 0.408,
+        "DEF_mae": 1.231,
+        "MID_mae": 1.075,
+        "FWD_mae": 0.948
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 15,
+        "GK_mae": 0.457,
+        "DEF_mae": 1.123,
+        "MID_mae": 0.962,
+        "FWD_mae": 1.008
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 16,
+        "GK_mae": 0.606,
+        "DEF_mae": 1.14,
+        "MID_mae": 0.968,
+        "FWD_mae": 1.15
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 17,
+        "GK_mae": 0.72,
+        "DEF_mae": 1.189,
+        "MID_mae": 0.979,
+        "FWD_mae": 1.095
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 18,
+        "GK_mae": 0.472,
+        "DEF_mae": 1.105,
+        "MID_mae": 0.948,
+        "FWD_mae": 0.918
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 19,
+        "GK_mae": 0.62,
+        "DEF_mae": 1.348,
+        "MID_mae": 0.923,
+        "FWD_mae": 0.996
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 20,
+        "GK_mae": 0.494,
+        "DEF_mae": 0.972,
+        "MID_mae": 0.967,
+        "FWD_mae": 1.17
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 21,
+        "GK_mae": 0.595,
+        "DEF_mae": 0.958,
+        "MID_mae": 0.925,
+        "FWD_mae": 1.094
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 22,
+        "GK_mae": 0.774,
+        "DEF_mae": 1.222,
+        "MID_mae": 0.844,
+        "FWD_mae": 0.92
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 23,
+        "GK_mae": 0.516,
+        "DEF_mae": 1.071,
+        "MID_mae": 0.99,
+        "FWD_mae": 1.18
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 24,
+        "GK_mae": 0.49,
+        "DEF_mae": 0.976,
+        "MID_mae": 0.933,
+        "FWD_mae": 1.179
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 25,
+        "GK_mae": 0.625,
+        "DEF_mae": 0.965,
+        "MID_mae": 0.931,
+        "FWD_mae": 0.995
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 26,
+        "GK_mae": 0.601,
+        "DEF_mae": 1.242,
+        "MID_mae": 0.927,
+        "FWD_mae": 1.093
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 27,
+        "GK_mae": 0.688,
+        "DEF_mae": 1.071,
+        "MID_mae": 0.83,
+        "FWD_mae": 1.071
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 28,
+        "GK_mae": 0.474,
+        "DEF_mae": 1.008,
+        "MID_mae": 0.905,
+        "FWD_mae": 1.234
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 29,
+        "GK_mae": 0.695,
+        "DEF_mae": 1.122,
+        "MID_mae": 0.821,
+        "FWD_mae": 1.156
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 30,
+        "GK_mae": 0.642,
+        "DEF_mae": 1.277,
+        "MID_mae": 0.798,
+        "FWD_mae": 0.778
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 31,
+        "GK_mae": 0.471,
+        "DEF_mae": 1.059,
+        "MID_mae": 0.825,
+        "FWD_mae": 1.253
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 32,
+        "GK_mae": 0.758,
+        "DEF_mae": 1.12,
+        "MID_mae": 0.809,
+        "FWD_mae": 1.105
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 33,
+        "GK_mae": 0.702,
+        "DEF_mae": 1.3,
+        "MID_mae": 0.992,
+        "FWD_mae": 1.242
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 34,
+        "GK_mae": 0.669,
+        "DEF_mae": 0.944,
+        "MID_mae": 0.908,
+        "FWD_mae": 1.084
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 35,
+        "GK_mae": 0.45,
+        "DEF_mae": 0.898,
+        "MID_mae": 0.95,
+        "FWD_mae": 1.26
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 36,
+        "GK_mae": 0.596,
+        "DEF_mae": 1.129,
+        "MID_mae": 0.973,
+        "FWD_mae": 0.87
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 37,
+        "GK_mae": 0.523,
+        "DEF_mae": 0.949,
+        "MID_mae": 0.833,
+        "FWD_mae": 1.247
+      },
+      {
+        "season": "2025-26",
+        "gameweek": 38,
+        "GK_mae": 0.555,
+        "DEF_mae": 1.093,
+        "MID_mae": 0.953,
+        "FWD_mae": 0.993
+      },
+      {
+        "season": "2026-27",
+        "gameweek": 1,
+        "GK_mae": 1.17,
+        "DEF_mae": 1.832,
+        "MID_mae": 1.653,
+        "FWD_mae": 1.577
+      },
+      {
+        "season": "2026-27",
+        "gameweek": 2,
+        "GK_mae": 0.879,
+        "DEF_mae": 1.35,
+        "MID_mae": 1.343,
+        "FWD_mae": 1.466
+      },
+      {
+        "season": "2026-27",
+        "gameweek": 3,
+        "GK_mae": 0.74,
+        "DEF_mae": 1.459,
+        "MID_mae": 1.203,
+        "FWD_mae": 1.177
+      },
+      {
+        "season": "2026-27",
+        "gameweek": 4,
+        "GK_mae": 0.822,
+        "DEF_mae": 1.563,
+        "MID_mae": 1.116,
+        "FWD_mae": 1.391
+      },
+      {
+        "season": "2026-27",
+        "gameweek": 5,
+        "GK_mae": 0.844,
+        "DEF_mae": 1.472,
+        "MID_mae": 1.123,
+        "FWD_mae": 1.15
+      }
+    ]
+  }
+}

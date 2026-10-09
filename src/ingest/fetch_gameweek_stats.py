@@ -41,13 +41,15 @@ INSERT INTO player_gameweek_stats (
     player_id, season, gameweek, total_points, minutes_played, goals_scored,
     assists, now_cost, clean_sheets, yellow_cards, red_cards, was_home,
     opponent_team, bonus, bps, starts, expected_goals, expected_assists,
-    expected_goal_involvements, expected_goals_conceded, is_double_gameweek
+    expected_goal_involvements, expected_goals_conceded, is_double_gameweek,
+    fixture_count
 )
 VALUES (
     :player_id, :season, :gameweek, :total_points, :minutes_played, :goals_scored,
     :assists, :now_cost, :clean_sheets, :yellow_cards, :red_cards, :was_home,
     :opponent_team, :bonus, :bps, :starts, :expected_goals, :expected_assists,
-    :expected_goal_involvements, :expected_goals_conceded, :is_double_gameweek
+    :expected_goal_involvements, :expected_goals_conceded, :is_double_gameweek,
+    :fixture_count
 )
 ON CONFLICT(player_id, season, gameweek) DO UPDATE SET
     total_points               = excluded.total_points,
@@ -67,7 +69,8 @@ ON CONFLICT(player_id, season, gameweek) DO UPDATE SET
     expected_assists           = excluded.expected_assists,
     expected_goal_involvements = excluded.expected_goal_involvements,
     expected_goals_conceded    = excluded.expected_goals_conceded,
-    is_double_gameweek         = excluded.is_double_gameweek
+    is_double_gameweek         = excluded.is_double_gameweek,
+    fixture_count              = excluded.fixture_count
 """
 
 

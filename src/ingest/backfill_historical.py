@@ -76,18 +76,27 @@ ON CONFLICT(player_id) DO UPDATE SET
 WHERE players.element_id IS NULL  -- never overwrite a current-season player
 """
 
+UPSERT_SEASON_IDENTITY = """
+INSERT INTO player_season_identity (player_id, season, web_name, position, team)
+VALUES (:code, :season, :web_name, :position, :team)
+ON CONFLICT(player_id, season) DO UPDATE SET
+    web_name=excluded.web_name, position=excluded.position, team=excluded.team
+"""
+
 UPSERT_GAMEWEEK_STATS = """
 INSERT INTO player_gameweek_stats (
     player_id, season, gameweek, total_points, minutes_played, goals_scored,
     assists, now_cost, clean_sheets, yellow_cards, red_cards, was_home,
     opponent_team, bonus, bps, starts, expected_goals, expected_assists,
-    expected_goal_involvements, expected_goals_conceded, is_double_gameweek
+    expected_goal_involvements, expected_goals_conceded, is_double_gameweek,
+    fixture_count
 )
 VALUES (
     :player_id, :season, :gameweek, :total_points, :minutes_played, :goals_scored,
     :assists, :now_cost, :clean_sheets, :yellow_cards, :red_cards, :was_home,
     :opponent_team, :bonus, :bps, :starts, :expected_goals, :expected_assists,
-    :expected_goal_involvements, :expected_goals_conceded, :is_double_gameweek
+    :expected_goal_involvements, :expected_goals_conceded, :is_double_gameweek,
+    :fixture_count
 )
 ON CONFLICT(player_id, season, gameweek) DO UPDATE SET
     total_points               = excluded.total_points,
@@ -107,7 +116,8 @@ ON CONFLICT(player_id, season, gameweek) DO UPDATE SET
     expected_assists           = excluded.expected_assists,
     expected_goal_involvements = excluded.expected_goal_involvements,
     expected_goals_conceded    = excluded.expected_goals_conceded,
-    is_double_gameweek         = excluded.is_double_gameweek
+    is_double_gameweek         = excluded.is_double_gameweek,
+    fixture_count              = excluded.fixture_count
 """
 
 
@@ -241,6 +251,7 @@ def backfill_season(season: str) -> tuple[int, int]:
 
     with get_connection() as conn:
         conn.executemany(UPSERT_PLAYER_IDENTITY, identity_rows)
+        conn.executemany(UPSERT_SEASON_IDENTITY, [{**r, "season": season} for r in identity_rows])
         conn.executemany(UPSERT_GAMEWEEK_STATS, gameweek_rows)
 
     print(

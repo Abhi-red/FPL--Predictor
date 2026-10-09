@@ -1,7 +1,8 @@
 """Ingest the FPL bootstrap-static feed and populate the `players` table.
 
-Scope: this script ONLY writes `players` (identity: code, element id, name,
-position, team, current price). Per-gameweek stats are a separate ingest step
+Scope: this script writes `players` and current `player_season_identity`
+(identity: code, element id, name, position, team, current price).
+Per-gameweek stats are a separate ingest step
 (src/ingest/fetch_gameweek_stats.py).
 
 Run:
@@ -24,6 +25,7 @@ from constants import (  # noqa: E402
     MAX_ATTEMPTS,
     POSITION_MAP,
     REQUEST_TIMEOUT,
+    SEASON,
 )
 from db import get_connection  # noqa: E402
 
@@ -140,6 +142,13 @@ def upsert_players(rows: list[PlayerRow]) -> int:
     """Insert new players and update existing ones. Returns the row count."""
     with get_connection() as conn:
         conn.executemany(UPSERT_PLAYER, rows)
+        conn.executemany(
+            """INSERT INTO player_season_identity
+               (player_id, season, web_name, position, team) VALUES (?, ?, ?, ?, ?)
+               ON CONFLICT(player_id, season) DO UPDATE SET
+                 web_name=excluded.web_name, position=excluded.position, team=excluded.team""",
+            [(r[0], SEASON, r[2], r[5], r[6]) for r in rows],
+        )
     return len(rows)
 
 

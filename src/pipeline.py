@@ -1,8 +1,8 @@
 """Run the weekly pipeline end to end: ingest -> features -> predict -> RAG ->
 optimise -> explain -> export site JSON.
 
-This is the incremental path (current-season gameweek fetch only); the one-time
-historical backfill is separate (src/ingest/backfill_historical.py).
+This is the incremental path. Cached historical data missing season identity
+is backfilled once before rebuilding features.
 
 Stage failures in the news/RAG stages are non-fatal (predictions just stay
 un-adjusted); any other stage failing aborts with exit code 1 so CI notices.
@@ -20,7 +20,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from constants import MODEL_MAX_AGE_DAYS, SEASON  # noqa: E402
+from constants import HISTORICAL_SEASONS, MODEL_MAX_AGE_DAYS, SEASON  # noqa: E402
 from db import get_connection, init_db  # noqa: E402
 
 MODELS_DIR = Path(__file__).resolve().parent.parent / "data" / "models"
@@ -57,10 +57,40 @@ def _report_fail(name: str, started: float) -> None:
     )
 
 
+def stage_fetch_fpl() -> None:
+    from ingest.fetch_fpl import main as fetch_fpl_main
+
+    fetch_fpl_main()
+
+
 def stage_fetch_gameweek_stats() -> None:
     from ingest.fetch_gameweek_stats import main as fetch_gw
 
     fetch_gw()
+
+
+def seasons_needing_identity() -> list[str]:
+    """Find cached historical seasons whose statistics lack season identity."""
+    with get_connection() as conn:
+        rows = conn.execute(
+            """SELECT DISTINCT s.season FROM player_gameweek_stats s
+               LEFT JOIN player_season_identity i
+                 ON i.player_id=s.player_id AND i.season=s.season
+               WHERE i.player_id IS NULL AND s.season != ? ORDER BY s.season""",
+            (SEASON,),
+        ).fetchall()
+    return [row["season"] for row in rows]
+
+
+def stage_ensure_historical_identity() -> None:
+    from ingest.backfill_historical import backfill_season
+
+    missing = seasons_needing_identity()
+    for season in missing:
+        if season not in HISTORICAL_SEASONS:
+            raise RuntimeError(f"No historical backfill configured for {season}")
+        print(f"Backfilling {season} identity missing from cached data")
+        backfill_season(season)
 
 
 def stage_track_accuracy() -> None:
@@ -77,14 +107,17 @@ def stage_build_features() -> None:
 
 def stage_ensure_models() -> None:
     global _RETRAINED
+    from features.build_features import feature_columns
     from models.train import production_fit
 
     manifest = MODELS_DIR / "manifest.json"
     models_present = all((MODELS_DIR / f"{p}.joblib").exists() for p in ("GK", "DEF", "MID", "FWD"))
     fresh = False
     if manifest.exists():
-        trained_at = datetime.fromisoformat(json.loads(manifest.read_text())["trained_at"])
-        fresh = (datetime.now(timezone.utc) - trained_at).days < MODEL_MAX_AGE_DAYS
+        saved = json.loads(manifest.read_text(encoding="utf-8"))
+        if saved.get("feature_columns") == feature_columns():
+            trained_at = datetime.fromisoformat(saved["trained_at"])
+            fresh = (datetime.now(timezone.utc) - trained_at).days < MODEL_MAX_AGE_DAYS
     if models_present and fresh:
         print("models present and fresh; skipping retrain")
         return
@@ -192,7 +225,9 @@ def stage_export_site_json() -> None:
 # results that just came in -> features -> models -> predict -> news -> elite
 # ownership -> optimise with the STORED elite weight -> explain -> publish.
 STAGES = [
+    ("fetch_fpl", stage_fetch_fpl),
     ("fetch_gameweek_stats", stage_fetch_gameweek_stats),
+    ("ensure_historical_identity", stage_ensure_historical_identity),
     ("track_accuracy", stage_track_accuracy),
     ("build_features", stage_build_features),
     ("ensure_models", stage_ensure_models),

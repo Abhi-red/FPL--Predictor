@@ -14,6 +14,7 @@ Aggregation rules (see DECISIONS.md):
     (ordered by kick-off time);
   * now_cost is the price at the LAST fixture (most recent);
   * is_double_gameweek is 1 when the gameweek had more than one fixture.
+  * fixture_count records the exact number of fixtures.
 
 `aggregate_history` is deliberately pure (no DB, no network) so it is cheap to
 unit-test; callers attach player_id / season to each returned row.
@@ -108,6 +109,7 @@ def aggregate_history(
         out["was_home"] = 1 if first.get("was_home") in (True, 1, "True", "true") else 0
         out["now_cost"] = _to_int(last.get("value")) or None
         out["is_double_gameweek"] = 1 if len(fixtures) > 1 else 0
+        out["fixture_count"] = len(fixtures)
 
         aggregated.append(out)
 

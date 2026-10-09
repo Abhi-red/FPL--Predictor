@@ -2,7 +2,7 @@
 
 Loads the per-position models from data/models/, builds a feature row for each
 player as of the upcoming gameweek (their real rolling history + the upcoming
-fixture's home/away and difficulty), and writes:
+fixture count, first fixture's home/away and difficulty), and writes:
 
   * table ``predictions`` — raw_points filled, adjusted_* left for the RAG step
   * ``data/predictions_raw.json`` — for quick inspection / the site
@@ -40,12 +40,17 @@ _META_COLS = [
 MODELS_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "models"
 PREDICTIONS_JSON = Path(__file__).resolve().parent.parent.parent / "data" / "predictions_raw.json"
 POSITIONS = ("GK", "DEF", "MID", "FWD")
+SITE_META = Path(__file__).resolve().parent.parent.parent / "site" / "data" / "meta.json"
 
 UPSERT_PREDICTION = """
 INSERT INTO predictions (player_id, season, gameweek, raw_points, generated_at)
 VALUES (:player_id, :season, :gameweek, :raw_points, :generated_at)
 ON CONFLICT(player_id, season, gameweek) DO UPDATE SET
     raw_points   = excluded.raw_points,
+    adjusted_points = NULL,
+    adjustment_factor = NULL,
+    adjustment_reason = NULL,
+    news_url = NULL,
     generated_at = excluded.generated_at
 """
 
@@ -59,9 +64,9 @@ def _bootstrap() -> dict:
 
 
 def next_gameweek(bootstrap: dict) -> int:
-    """First event that isn't finished; fall back to the one flagged `is_next`."""
+    """First event whose games have not started."""
     for event in bootstrap["events"]:
-        if not event["finished"]:
+        if not event["finished"] and not event.get("is_current"):
             return int(event["id"])
     for event in bootstrap["events"]:
         if event.get("is_next"):
@@ -69,8 +74,20 @@ def next_gameweek(bootstrap: dict) -> int:
     raise RuntimeError("Could not determine the next gameweek from bootstrap events")
 
 
-def upcoming_fixtures(gameweek: int, bootstrap: dict) -> dict[str, tuple[int, str]]:
-    """team name -> (was_home, opponent name) for `gameweek`; first fixture on a double."""
+def assert_not_older_than_site(season: str, gameweek: int, site_meta: Path = SITE_META) -> None:
+    """Protect published results when a local database or feed lags behind."""
+    if not site_meta.exists():
+        return
+    published = json.loads(site_meta.read_text(encoding="utf-8"))
+    if published.get("season") == season and int(published.get("gameweek") or 0) > gameweek:
+        raise RuntimeError(
+            f"local prediction GW{gameweek} is older than published GW{published['gameweek']}; "
+            "refresh the live data before regenerating the site"
+        )
+
+
+def upcoming_fixtures(gameweek: int, bootstrap: dict) -> dict[str, tuple[int, str, int]]:
+    """team name -> (first-fixture venue, opponent, fixture count)."""
     team_name = {t["id"]: t["name"] for t in bootstrap["teams"]}
     resp = requests.get(
         f"{FPL_BASE}/fixtures/",
@@ -81,13 +98,18 @@ def upcoming_fixtures(gameweek: int, bootstrap: dict) -> dict[str, tuple[int, st
     resp.raise_for_status()
 
     out: dict[str, tuple[int, str]] = {}
+    counts: dict[str, int] = {}
     for fixture in sorted(resp.json(), key=lambda f: f.get("kickoff_time") or ""):
         home, away = team_name.get(fixture["team_h"]), team_name.get(fixture["team_a"])
+        if home:
+            counts[home] = counts.get(home, 0) + 1
+        if away:
+            counts[away] = counts.get(away, 0) + 1
         if home and home not in out:
             out[home] = (1, away)
         if away and away not in out:
             out[away] = (0, home)
-    return out
+    return {team: (*first, counts[team]) for team, first in out.items()}
 
 
 def build_upcoming_matrix(gameweek: int, bootstrap: dict) -> pd.DataFrame:
@@ -121,7 +143,7 @@ def build_upcoming_matrix(gameweek: int, bootstrap: dict) -> pd.DataFrame:
         fixture = fixtures.get(player.team)
         if fixture is None:
             continue  # blank gameweek for this player's club
-        was_home, opponent = fixture
+        was_home, opponent, fixture_count = fixture
         row = {col: np.nan for col in stats.columns}
         row.update(
             player_id=player.player_id,
@@ -130,7 +152,8 @@ def build_upcoming_matrix(gameweek: int, bootstrap: dict) -> pd.DataFrame:
             now_cost=player.now_cost,
             was_home=was_home,
             opponent_team=opponent,
-            is_double_gameweek=0,
+            is_double_gameweek=int(fixture_count > 1),
+            fixture_count=fixture_count,
             position=player.position,
             team=player.team,
             web_name=player.web_name,
@@ -158,6 +181,9 @@ def build_upcoming_matrix(gameweek: int, bootstrap: dict) -> pd.DataFrame:
 def load_models() -> dict:
     import joblib
 
+    manifest = MODELS_DIR / "manifest.json"
+    if not manifest.exists() or json.loads(manifest.read_text(encoding="utf-8")).get("feature_columns") != feature_columns():
+        raise SystemExit("Model feature schema is stale; retrain with `python src/models/train.py`.")
     models = {}
     for position in POSITIONS:
         path = MODELS_DIR / f"{position}.joblib"
@@ -172,6 +198,7 @@ def load_models() -> dict:
 def main() -> None:
     bootstrap = _bootstrap()
     gameweek = next_gameweek(bootstrap)
+    assert_not_older_than_site(SEASON, gameweek)
     print(f"Predicting {SEASON} GW{gameweek}")
 
     models = load_models()

@@ -73,7 +73,20 @@ CREATE TABLE IF NOT EXISTS player_gameweek_stats (
     expected_goal_involvements REAL,
     expected_goals_conceded REAL,
     is_double_gameweek INTEGER NOT NULL DEFAULT 0,
+    fixture_count INTEGER NOT NULL DEFAULT 1,
     PRIMARY KEY (player_id, season, gameweek),
+    FOREIGN KEY (player_id) REFERENCES players (player_id)
+);
+"""
+
+CREATE_PLAYER_SEASON_IDENTITY = """
+CREATE TABLE IF NOT EXISTS player_season_identity (
+    player_id INTEGER NOT NULL,
+    season TEXT NOT NULL,
+    web_name TEXT NOT NULL,
+    position TEXT NOT NULL CHECK (position IN ('GK', 'DEF', 'MID', 'FWD')),
+    team TEXT NOT NULL,
+    PRIMARY KEY (player_id, season),
     FOREIGN KEY (player_id) REFERENCES players (player_id)
 );
 """
@@ -165,6 +178,7 @@ CREATE TABLE IF NOT EXISTS prediction_accuracy (
 
 ALL_CREATE_STATEMENTS = (
     CREATE_PLAYERS,
+    CREATE_PLAYER_SEASON_IDENTITY,
     CREATE_PLAYER_GAMEWEEK_STATS,
     CREATE_NEWS_CHUNKS,
     CREATE_PREDICTIONS,
@@ -187,6 +201,7 @@ _PGS_ADDITIVE_COLUMNS: dict[str, str] = {
     "expected_goal_involvements": "REAL",
     "expected_goals_conceded": "REAL",
     "is_double_gameweek": "INTEGER NOT NULL DEFAULT 0",
+    "fixture_count": "INTEGER NOT NULL DEFAULT 1",
 }
 
 
@@ -233,6 +248,11 @@ def migrate(db_path: Path = DB_PATH) -> None:
                     conn.execute(
                         f"ALTER TABLE player_gameweek_stats ADD COLUMN {column} {decl}"
                     )
+            if "fixture_count" not in existing:
+                conn.execute(
+                    "UPDATE player_gameweek_stats SET fixture_count = 2 "
+                    "WHERE is_double_gameweek = 1"
+                )
 
         conn.commit()
     finally:

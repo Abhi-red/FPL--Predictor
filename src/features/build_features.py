@@ -65,6 +65,7 @@ _EXTRA_FEATURES: tuple[str, ...] = (
     "ownership_trend_3",
     "fdr",
     "was_home",
+    "fixture_count",
 )
 
 
@@ -81,11 +82,23 @@ def feature_columns() -> list[str]:
 def load_stats_frame() -> pd.DataFrame:
     """player_gameweek_stats joined to player position/team, ordered for rolling."""
     with get_connection() as conn:
+        missing = conn.execute(
+            """SELECT COUNT(*) FROM player_gameweek_stats s
+               LEFT JOIN player_season_identity i
+                 ON i.player_id=s.player_id AND i.season=s.season
+               WHERE i.player_id IS NULL"""
+        ).fetchone()[0]
+        if missing:
+            raise RuntimeError(
+                f"{missing} gameweek rows lack historical identity; "
+                "run src/ingest/backfill_historical.py and src/ingest/fetch_fpl.py"
+            )
         df = pd.read_sql_query(
             """
-            SELECT s.*, p.position, p.team, p.web_name
+            SELECT s.*, i.position, i.team, i.web_name
             FROM player_gameweek_stats s
-            JOIN players p ON p.player_id = s.player_id
+            JOIN player_season_identity i
+              ON i.player_id = s.player_id AND i.season = s.season
             """,
             conn,
         )
@@ -220,6 +233,7 @@ def add_features(df: pd.DataFrame, strengths: dict) -> pd.DataFrame:
     df = df.join(blocks)
     df["fdr"] = _fdr_column(df, strengths)
     df["was_home"] = df["was_home"].fillna(0).astype("int64")
+    df["fixture_count"] = df["fixture_count"].fillna(1).astype("int64")
     df["target_points"] = df["total_points"].astype("float64")
     return df
 
@@ -267,7 +281,10 @@ def get_feature_frame(rebuild: bool = False) -> pd.DataFrame:
     """Return the feature matrix, building it if the parquet is missing/stale."""
     if rebuild or not FEATURES_PARQUET.exists():
         return build()
-    return pd.read_parquet(FEATURES_PARQUET)
+    frame = pd.read_parquet(FEATURES_PARQUET)
+    if any(column not in frame.columns for column in feature_columns()):
+        return build()
+    return frame
 
 
 def main() -> None:
