@@ -51,9 +51,6 @@ jobs:
           python src/ingest/fetch_fpl.py
           python src/ingest/backfill_historical.py
 
-      - name: Refresh player identity / prices
-        run: python src/ingest/fetch_fpl.py
-
       - name: Run pipeline
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}

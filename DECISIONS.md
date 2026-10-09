@@ -11,6 +11,10 @@ the top of each section.
 use the stable `code` as `players.player_id` and keep the current season's
 `element` id in `players.element_id` (needed to hit `element-summary/{id}/`).
 Historical rows map `element -> code` through each season's `players_raw.csv`.
+Historical feature rows join to `player_season_identity`, which preserves the
+club and position recorded for that season. Older caches missing these rows
+are backfilled before feature generation; features fail rather than silently
+use the player's current club or position.
 `db.migrate()` drops a pre-`code` `players` table (the gameweek table is empty
 whenever that applies) and `fetch_fpl.py` repopulates it.
 
@@ -26,6 +30,8 @@ capped** (a double can exceed 90); `was_home` and `opponent_team` come from the
 **first** fixture by kick-off time; `now_cost` is the last fixture's price;
 `is_double_gameweek = 1` when the gameweek had >1 fixture. One pure function,
 shared by the live and historical ingests and unit-tested.
+`fixture_count` records the exact count and is a model input. For an upcoming
+double, the opponent and venue represent the first fixture.
 
 **`player_features` is owned by `build_features.py`**, not `db.py` — it is
 rewritten wholesale (`to_sql(if_exists="replace")`) each run so its columns can
@@ -57,6 +63,8 @@ so a row never sees its own or any later result. The walk-forward backtest
 (`train.py --backtest`) trains only on `(season, gameweek)` tuples strictly
 before the scored one; it refits every `--stride` gameweeks (default 3) rather
 than every gameweek purely for runtime.
+Saved models are retrained if their manifest's feature list differs from the
+current feature list, even if they are otherwise recent.
 
 **Fixture difficulty** is derived from team `strength_overall_home/away`
 (bootstrap for the live season, vaastav `teams.csv` for past seasons), scaled to
@@ -82,7 +90,7 @@ from every surviving `news_chunks` row each run after chunks older than
 `NEWS_MAX_AGE_DAYS` (21) are deleted.
 
 **Adjustment is bounded and signal-gated.** A chunk only adjusts a prediction if
-it contains the player's surname *and* a categorised keyword: `OUT` → ×0.70,
+an identifying player name and an availability phrase share a clause: `OUT` → ×0.70,
 `DOUBT` → ×0.85, `BOOST` → ×1.15. The factor is clamped to
 `[1 − ADJUSTMENT_CAP, 1 + ADJUSTMENT_CAP]` = `[0.70, 1.30]` — news can nudge a
 prediction, never replace it. Factor + reason + source URL are stored on
