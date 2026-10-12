@@ -1,25 +1,29 @@
 {
   "season": "2026-27",
-  "gameweek": 6,
-  "generated_at": "2026-10-09T07:17:24.559051+00:00",
-  "source": "template (api-error)",
+  "gameweek": 7,
+  "generated_at": "2026-10-12T16:04:25.740085+00:00",
+  "source": "claude-sonnet-4-6",
   "elite_weight": 0.0,
-  "elite_weight_status": "tuned",
-  "elite_note": "Elite tuning ran over 5 gameweeks and found no weight beat pure stats, so elite ownership was NOT used (weight 0.0).",
-  "summary": "A 4-5-1 squad costing \u00a399.6m, projected 70.1 points for GW6. Built by maximising model-predicted points under FPL's budget, formation and 3-per-club rules.",
-  "captain_rationale": "B.Fernandes is the highest projected starter, with Gabriel as vice.",
+  "elite_weight_status": "no-config",
+  "elite_note": "Elite-template weight 0.0 (no tuning config yet); squad is pure model + news.",
+  "summary": "A 4-4-2 squad built entirely on the points model's predictions, with no elite-ownership influence whatsoever \u2014 the elite_weight is 0.0 due to no tuning config being set, so selections are driven purely by projected points and news flags. The squad spends heavily on Haaland (\u00a315.6m) and keeps costs low in defence with budget picks like Sessegnon and Van Hecke, freeing funds for a solid midfield quartet. Despite a projected 67.74 points, the bench is extremely weak with near-zero expected returns across all four spots.",
+  "captain_rationale": "Haaland is the clear captain pick with the highest predicted points in the squad at 7.29, and is owned by 99% of elite managers \u2014 an overwhelming consensus that the model independently agrees with. Van Hecke (6.11 predicted points) is a surprising vice-captain, likely chosen because he posts the second-highest individual projection in the XI, even though only 3% of elite managers hold him.",
   "standout_picks": [
     {
-      "player": "B.Fernandes",
-      "reason": "Man Utd MID at \u00a311.9m, projected 6.81 pts, elite ownership 24%"
+      "player": "Van Hecke",
+      "reason": "The highest-scoring outfield defender in the squad at 6.11 predicted points despite costing just \u00a34.9m, making him exceptional value. Only 3% of elite managers own him, so this is a pure model call rather than a template follow."
     },
     {
-      "player": "Gabriel",
-      "reason": "Arsenal DEF at \u00a38.0m, projected 6.4 pts, elite ownership 10%"
+      "player": "De Cuyper",
+      "reason": "With 5.11 predicted points and an elite_template_score of 0.91, De Cuyper is one of the rare cases where the model and elite managers strongly agree \u2014 91% of top managers hold the Brighton defender, and the points projection backs that up even without elite weighting applied."
     },
     {
-      "player": "Gro\u00df",
-      "reason": "Brighton MID at \u00a35.9m, projected 6.02 pts, elite ownership 66%"
+      "player": "Raya",
+      "reason": "At 5.66 predicted points Raya is the third-highest scorer in the starting XI, making him excellent value in goal at \u00a36.1m. His 0.45 elite_template_score shows meaningful elite backing, and the model independently rates him highly."
+    },
+    {
+      "player": "Cherki",
+      "reason": "The Man City midfielder posts 5.96 predicted points at \u00a37.8m, the best return among the midfield four, yet only 20% of elite managers hold him \u2014 the model is taking a differentiated stance on his attacking output this gameweek."
     }
   ]
 }
