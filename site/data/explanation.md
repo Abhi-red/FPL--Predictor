@@ -1,17 +1,17 @@
-# Suggested squad - 2026-27 GW9
+# Suggested squad - 2026-27 GW10
 
-The squad runs a 3-4-3 built entirely on the points model's predictions, with elite ownership having zero influence — elite_weight is 0.0 and the note confirms no tuning config exists, so this is a pure model-and-news output. The shape is budget-heavy at the back (three defenders costing under £13.5m combined) and on the bench, freeing spend for Haaland up front and Palmer in midfield. Total projected points sit at 59.74 across the XI.
+The squad lines up in a 4-5-1 built almost entirely on the model's predicted points, with no influence from elite manager ownership — the elite weight is 0.0 due to no tuning configuration being in place. The result is a points-maximising XI costing £98.9m, leaning heavily on Arsenal (three starters) and mixing budget defenders with premium midfielders. Bench assets like Watkins and Anselmino have near-zero predicted points, suggesting they are pure squad fillers to free up funds for the starting XI.
 
-**Formation** 3-4-3 | **Cost** £91.3m | **Projected** 59.74 pts
+**Formation** 4-5-1 | **Cost** £98.9m | **Projected** 64.67 pts
 
-**Captain:** Khalaili | **Vice:** Thiago  
-Khalaili leads as captain despite being a defender, driven purely by his model-high predicted_points of 5.54 (doubling to ~11.1 captained), while Thiago (5.42 predicted) is the vice — both sit above the premium options like Palmer (4.82) and Haaland (4.92) in raw projections for this gameweek.
+**Captain:** Ødegaard | **Vice:** Rice  
+Ødegaard is captained on the back of the highest predicted points in the squad at 6.13, meaning his doubled score would be the single biggest points lever available. Rice (6.0 predicted) is a logical vice as the second-highest scorer and also an Arsenal midfielder likely to benefit from similar fixtures and game-time.
 
 _Elite weight: 0.0 (no-config). Elite-template weight 0.0 (no tuning config yet); squad is pure model + news._
 
 ## Standout picks
 
-- **Khalaili** - The Crystal Palace defender tops the XI with 5.54 predicted points and carries the captain armband — his elite_template_score of 0.0 means almost no top managers own him, making this a contrarian, model-driven punt that could be a big differential if it lands.
-- **Haaland** - At 15.7m and with an elite_template_score of 1.0 — owned by every single elite manager — Haaland is the one selection that aligns with the elite consensus, even though the model only projects him at 4.92 points; his inclusion is essentially a structural necessity to avoid falling behind the top cohort.
-- **Palmer** - With a 0.63 elite_template_score he is broadly held among top managers, yet his predicted_points of 4.82 are modest for a £9.8m asset — the model keeps him in but he is arguably the pick where value is most questionable relative to his price.
-- **McBurnie** - At just £5.5m McBurnie puts up 5.21 predicted points — the second-best return in the forward line — with an elite_template_score of 0.0, making him a high-efficiency budget striker that the model clearly rates as a strong differential option this week.
+- **Iwobi** - At just £5.4m, Iwobi delivers a predicted 5.66 points — matching the much pricier Haaland — with an elite template score of 0.0, making him a pure model find and a strong differential value pick.
+- **Tavernier** - Tavernier carries the highest elite template score in the squad at 0.72, yet the model still selected him purely on his predicted 4.97 points; unusually, elite consensus and the model happen to agree here even though the elite signal was officially ignored.
+- **Haaland** - Owned by 99% of elite managers (elite template score 0.99) and priced at a hefty £15.8m, Haaland's predicted 5.66 points is respectable but not dominant — he is selected as an essential 'template-proof' insurance rather than a standout value pick.
+- **Jacquet** - At £5.1m with 4.83 predicted points and a 0.0 elite template score, Jacquet is a completely model-driven Liverpool defensive pick that frees budget for premium assets elsewhere — though the lack of any elite backing means higher uncertainty around his role.
