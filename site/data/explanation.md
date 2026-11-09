@@ -1,17 +1,17 @@
-# Suggested squad - 2026-27 GW10
+# Suggested squad - 2026-27 GW11
 
-The squad lines up in a 4-5-1 built almost entirely on the model's predicted points, with no influence from elite manager ownership — the elite weight is 0.0 due to no tuning configuration being in place. The result is a points-maximising XI costing £98.9m, leaning heavily on Arsenal (three starters) and mixing budget defenders with premium midfielders. Bench assets like Watkins and Anselmino have near-zero predicted points, suggesting they are pure squad fillers to free up funds for the starting XI.
+A 3-4-3 built entirely on the points model's predictions, with no elite-template influence whatsoever — the elite_weight is 0.0 and the squad is described as 'pure model + news.' The shape leans heavily on a Bournemouth double-up in defence and attack, with a front three anchored by two premium strikers and Evanilson as a value differential. The bench is thin, with Heaven and Yirenkyi acting as pure squad-fillers at minimum cost.
 
-**Formation** 4-5-1 | **Cost** £98.9m | **Projected** 64.67 pts
+**Formation** 3-4-3 | **Cost** £98.5m | **Projected** 67.43 pts
 
-**Captain:** Ødegaard | **Vice:** Rice  
-Ødegaard is captained on the back of the highest predicted points in the squad at 6.13, meaning his doubled score would be the single biggest points lever available. Rice (6.0 predicted) is a logical vice as the second-highest scorer and also an Arsenal midfielder likely to benefit from similar fixtures and game-time.
+**Captain:** Evanilson | **Vice:** Haaland  
+Evanilson leads the armband with the squad's highest predicted points at 6.74, edging out Haaland (6.70) despite costing less than half the price — the model backs him as the marginally superior captain pick this week. Haaland, owned by 99% of elite managers and priced at £15.8m, is the natural vice in case of any late issues.
 
 _Elite weight: 0.0 (no-config). Elite-template weight 0.0 (no tuning config yet); squad is pure model + news._
 
 ## Standout picks
 
-- **Iwobi** - At just £5.4m, Iwobi delivers a predicted 5.66 points — matching the much pricier Haaland — with an elite template score of 0.0, making him a pure model find and a strong differential value pick.
-- **Tavernier** - Tavernier carries the highest elite template score in the squad at 0.72, yet the model still selected him purely on his predicted 4.97 points; unusually, elite consensus and the model happen to agree here even though the elite signal was officially ignored.
-- **Haaland** - Owned by 99% of elite managers (elite template score 0.99) and priced at a hefty £15.8m, Haaland's predicted 5.66 points is respectable but not dominant — he is selected as an essential 'template-proof' insurance rather than a standout value pick.
-- **Jacquet** - At £5.1m with 4.83 predicted points and a 0.0 elite template score, Jacquet is a completely model-driven Liverpool defensive pick that frees budget for premium assets elsewhere — though the lack of any elite backing means higher uncertainty around his role.
+- **Evanilson** - The model's top scorer at 6.74 predicted points and priced at just £6.5m, he is the captain and represents a significant value differential — only 22% of elite managers own him, meaning this is a bold, model-driven punt against the consensus.
+- **Groß** - With 6.31 predicted points and an elite_template_score of 0.89, Groß is one of the rare cases where the model and elite managers align — 89% of top managers hold him, suggesting he is a near-essential pick at £6.3m this week, even though elite weight was not formally applied.
+- **Rogers** - An elite_template_score of 0.87 makes Rogers one of the most widely held assets among top managers, and his 5.23 predicted points at £8.2m backs up that popularity; again, the model selected him on pure numbers rather than any deliberate elite-mimicry.
+- **Mitchell** - At just £4.5m Mitchell delivers 5.03 predicted points, making him the most cost-efficient starter in the backline and a key enabler of premium spending on Haaland — his zero elite_template_score flags him as a pure model pick that the top managers are not using.
