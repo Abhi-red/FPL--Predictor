@@ -1,17 +1,17 @@
 # Suggested squad - 2026-27 GW11
 
-A 3-4-3 built entirely on the points model's predictions, with no elite-template influence whatsoever — the elite_weight is 0.0 and the squad is described as 'pure model + news.' The shape leans heavily on a Bournemouth double-up in defence and attack, with a front three anchored by two premium strikers and Evanilson as a value differential. The bench is thin, with Heaven and Yirenkyi acting as pure squad-fillers at minimum cost.
+The squad runs a 4-3-3 built entirely on the points model's projections, with zero weighting given to elite-manager ownership — the elite_note confirms this is 'pure model + news' with no tuning config applied. Budget is spread across a cheap defensive core (Mitchell at £4.5m, Truffert at £5.4m) to fund Haaland's £15.8m price tag and a Bournemouth double-up in Evanilson and Tavernier. Despite several players carrying high elite_template_scores (Groß at 0.89, Haaland at 0.99, De Cuyper at 0.71), those figures played no role in selection.
 
-**Formation** 3-4-3 | **Cost** £98.5m | **Projected** 67.43 pts
+**Formation** 4-3-3 | **Cost** £95.1m | **Projected** 72.32 pts
 
-**Captain:** Evanilson | **Vice:** Haaland  
-Evanilson leads the armband with the squad's highest predicted points at 6.74, edging out Haaland (6.70) despite costing less than half the price — the model backs him as the marginally superior captain pick this week. Haaland, owned by 99% of elite managers and priced at £15.8m, is the natural vice in case of any late issues.
+**Captain:** Evanilson | **Vice:** Gabriel  
+Evanilson is captained on the back of the highest individual predicted_points in the XI at 8.24 — almost 2.6 points clear of the next best — making him the model's standout pick regardless of his modest elite ownership (0.22). Gabriel (6.62 predicted, elite score 0.46) is a sensible vice given clean-sheet upside from an Arsenal defence.
 
 _Elite weight: 0.0 (no-config). Elite-template weight 0.0 (no tuning config yet); squad is pure model + news._
 
 ## Standout picks
 
-- **Evanilson** - The model's top scorer at 6.74 predicted points and priced at just £6.5m, he is the captain and represents a significant value differential — only 22% of elite managers own him, meaning this is a bold, model-driven punt against the consensus.
-- **Groß** - With 6.31 predicted points and an elite_template_score of 0.89, Groß is one of the rare cases where the model and elite managers align — 89% of top managers hold him, suggesting he is a near-essential pick at £6.3m this week, even though elite weight was not formally applied.
-- **Rogers** - An elite_template_score of 0.87 makes Rogers one of the most widely held assets among top managers, and his 5.23 predicted points at £8.2m backs up that popularity; again, the model selected him on pure numbers rather than any deliberate elite-mimicry.
-- **Mitchell** - At just £4.5m Mitchell delivers 5.03 predicted points, making him the most cost-efficient starter in the backline and a key enabler of premium spending on Haaland — his zero elite_template_score flags him as a pure model pick that the top managers are not using.
+- **Evanilson** - The model's top scorer at 8.24 predicted points and the deserving captain choice; his relatively low elite ownership (0.22) means this is a confident differentiator call backed purely by numbers.
+- **Groß** - Tied for second-highest predicted points in the XI at 6.62 and owned by 89% of elite managers — the model and the top players agree on his value, making him one of the safest picks in the squad at just £6.3m.
+- **Haaland** - Despite only 5.61 predicted points — his lowest return in the squad relative to cost — Haaland's 0.99 elite ownership means virtually every top manager holds him; the model keeps him in but the underwhelming projection hints at a tough fixture or rotation concern this gameweek.
+- **Mitchell** - At £4.5m with 5.43 predicted points, Mitchell is the squad's most efficient budget defender and carries zero elite ownership (0.0), flagging him as a pure model-driven differential in the defensive line.
