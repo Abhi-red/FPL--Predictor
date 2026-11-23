@@ -1,17 +1,17 @@
-# Suggested squad - 2026-27 GW11
+# Suggested squad - 2026-27 GW12
 
-The squad runs a 4-3-3 built entirely on the points model's projections, with zero weighting given to elite-manager ownership — the elite_note confirms this is 'pure model + news' with no tuning config applied. Budget is spread across a cheap defensive core (Mitchell at £4.5m, Truffert at £5.4m) to fund Haaland's £15.8m price tag and a Bournemouth double-up in Evanilson and Tavernier. Despite several players carrying high elite_template_scores (Groß at 0.89, Haaland at 0.99, De Cuyper at 0.71), those figures played no role in selection.
+A 4-4-2 squad built entirely on the points model's predictions, costing £87.0m with a projected 69.87 points. Elite ownership was completely ignored — the elite_weight is 0.0 with no tuning config applied, so players like Groß (owned by 95% of elite managers) and Verbruggen (38%) appear purely because the model rated them highly, not because of their template status. The squad leans heavily on Bournemouth (Silva, Tavernier, Evanilson) and Leeds (Bogle, Justin, Calvert-Lewin) assets.
 
-**Formation** 4-3-3 | **Cost** £95.1m | **Projected** 72.32 pts
+**Formation** 4-4-2 | **Cost** £87.0m | **Projected** 69.87 pts
 
-**Captain:** Evanilson | **Vice:** Gabriel  
-Evanilson is captained on the back of the highest individual predicted_points in the XI at 8.24 — almost 2.6 points clear of the next best — making him the model's standout pick regardless of his modest elite ownership (0.22). Gabriel (6.62 predicted, elite score 0.46) is a sensible vice given clean-sheet upside from an Arsenal defence.
+**Captain:** B.Fernandes | **Vice:** Groß  
+B.Fernandes captains with the highest predicted points in the XI at 6.62 (meaning the captain's double brings a projected ~13.24), despite a near-zero elite_template_score of 0.02 — a pure model call. Groß is a sensible vice at 6.25 predicted points and is owned by 95% of elite managers, offering strong upside cover.
 
 _Elite weight: 0.0 (no-config). Elite-template weight 0.0 (no tuning config yet); squad is pure model + news._
 
 ## Standout picks
 
-- **Evanilson** - The model's top scorer at 8.24 predicted points and the deserving captain choice; his relatively low elite ownership (0.22) means this is a confident differentiator call backed purely by numbers.
-- **Groß** - Tied for second-highest predicted points in the XI at 6.62 and owned by 89% of elite managers — the model and the top players agree on his value, making him one of the safest picks in the squad at just £6.3m.
-- **Haaland** - Despite only 5.61 predicted points — his lowest return in the squad relative to cost — Haaland's 0.99 elite ownership means virtually every top manager holds him; the model keeps him in but the underwhelming projection hints at a tough fixture or rotation concern this gameweek.
-- **Mitchell** - At £4.5m with 5.43 predicted points, Mitchell is the squad's most efficient budget defender and carries zero elite ownership (0.0), flagging him as a pure model-driven differential in the defensive line.
+- **Groß** - The model's second-highest scorer at 6.25 predicted points and carried by 95% of elite managers — a rare case where model and elite consensus align perfectly, even though elite ownership played no role in his selection.
+- **Tavernier** - Predicted 6.14 points at just £6.7m makes him excellent value, and 69% elite ownership provides further confidence that this isn't an outlier model pick.
+- **Calvert-Lewin** - The model's top-scoring forward at 5.98 predicted points for only £6.0m, giving strong bang-for-buck in a Leeds side the model appears bullish on with three starters selected.
+- **Bogle** - At £4.8m Bogle contributes a solid 5.96 predicted points — the highest of the four defenders — making him a key budget enabler for the premium midfield, despite almost no elite backing (0.04).
